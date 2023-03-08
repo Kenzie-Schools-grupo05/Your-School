@@ -80,7 +80,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const listClassRooms = async () => {
     const teacherToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODE3MTc0OCwiZXhwIjoxNjc4MTc1MzQ4LCJzdWIiOiIzIn0.WSVJ8DhNH3Gyx-tIjqeWBiwCOyobrgE8SZOpVqdb2FA";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODIxOTQ3NywiZXhwIjoxNjc4MjIzMDc3LCJzdWIiOiIzIn0.1938W4cktDp4RuDme2gO3gLHVgfgB8Y2LczBqTgIUNI";
 
     try {
       const response = await api.get<iClassRoom[]>("/classes", {
@@ -94,6 +94,8 @@ export const UserProvider = ({ children }: iUserProvider) => {
       console.log(currentError);
     }
   };
+
+
 
   return (
     <UserContext.Provider
