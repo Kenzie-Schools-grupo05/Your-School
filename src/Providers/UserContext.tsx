@@ -44,6 +44,13 @@ interface iUserContext {
   user: iUser | null;
   setUser: (props: iUser) => void;
   childs: iUser[] | null | undefined;
+  classRoom: iClassRoom[] | null | undefined;
+  listClassRooms: () => Promise<void>;
+}
+
+interface iClassRoom {
+  class: string;
+  grade: iGrade;
   schoolGrades: (studentId: number) => Promise<void>
   studentGrade: iUser 
   // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
@@ -55,6 +62,15 @@ export const UserProvider = ({ children }: iUserProvider) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [childs, setChilds] = useState<iUser[] | null | undefined>(null);
+  const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(
+    null
+  );
+
+  const handleLogout = () => {
+    const navigate = useNavigate();
+    localStorage.clear();
+    return navigate("/");
+  };
 
   const getChildGrades = async (cpfParent: string) => {
     // const tokenLS = localStorage.getItem('@TOKEN');
@@ -68,6 +84,23 @@ export const UserProvider = ({ children }: iUserProvider) => {
         },
       });
       setChilds(users.data);
+    } catch (error) {
+      const currentError = error as AxiosError<iRequestError>;
+      console.log(currentError);
+    }
+  };
+
+  const listClassRooms = async () => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODE3MTc0OCwiZXhwIjoxNjc4MTc1MzQ4LCJzdWIiOiIzIn0.WSVJ8DhNH3Gyx-tIjqeWBiwCOyobrgE8SZOpVqdb2FA";
+
+    try {
+      const response = await api.get<iClassRoom[]>("/classes", {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+      setClassRoom(response.data);
     } catch (error) {
       const currentError = error as AxiosError<iRequestError>;
       console.log(currentError);

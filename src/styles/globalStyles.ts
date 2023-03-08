@@ -2,7 +2,9 @@ import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 *{
-    --color-primary: #202F5A;
+
+    :root{
+        --color-primary: #202F5A;
     --color-secondary: #2862A5;
     --color-terciary: #6675A0;
 
@@ -28,6 +30,8 @@ export const GlobalStyle = createGlobalStyle`
     --Bold: 600;
     --Medium: 500;
     --Regular: 400;
+
+    }
 
     /* Reset  */
     /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -55,8 +59,12 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
     list-style: none;
-    
+    font-family: "Inter", sans-serif;
 }
 }
-    
+
+body{
+    background-color: #DDDDDD;
+}
+
 `;
