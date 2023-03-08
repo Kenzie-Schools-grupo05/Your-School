@@ -26,6 +26,7 @@ export interface iUser {
   cpfParent?: string;
   class?: string;
   grades?: iGrade;
+  id: number;
 }
 
 export interface iGrade {
@@ -43,6 +44,9 @@ interface iUserContext {
   user: iUser | null;
   setUser: (props: iUser) => void;
   childs: iUser[] | null | undefined;
+  schoolGrades: (studentId: number) => Promise<void>
+  studentGrade: iUser 
+  // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
@@ -70,8 +74,39 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
+  const [studentGrade, setStudentGrade] = useState<iUser>( {} as iUser);
+
+  async function schoolGrades(studentId:number) {
+    const tokenLS = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzA0Mzc1LCJleHAiOjE2NzgzMDc5NzUsInN1YiI6IjEifQ.TQOErWivk3465zMMIRtiEK2_bDeEbL3nqBKLPU7-OR4"
+
+
+    try {
+      const response = await api.get<iUser>(`/users/${1}`, {
+        headers: {
+          Authorization: `Bearer ${tokenLS}`,
+        },
+      });
+      setStudentGrade(response.data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+   
+  }
+
   return (
-    <UserContext.Provider value={{ getChildGrades, user, setUser, childs }}>
+    <UserContext.Provider
+      value={{
+        getChildGrades,
+        user,
+        setUser,
+        childs,
+        schoolGrades,
+        studentGrade,
+      
+       
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
