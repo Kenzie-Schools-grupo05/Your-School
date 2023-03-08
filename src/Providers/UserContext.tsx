@@ -44,7 +44,7 @@ interface iUserContext {
   setUser: (props: iUser) => void;
   childs: iUser[] | null | undefined;
   classRoom: iClassRoom[] | null | undefined;
-  listClassRooms: () => Promise<void>
+  listClassRooms: () => Promise<void>;
 }
 
 interface iClassRoom {
@@ -58,7 +58,15 @@ export const UserProvider = ({ children }: iUserProvider) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [childs, setChilds] = useState<iUser[] | null | undefined>(null);
-  const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(null);
+  const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(
+    null
+  );
+
+  const handleLogout = () => {
+    const navigate = useNavigate();
+    localStorage.clear();
+    return navigate("/");
+  };
 
   const getChildGrades = async (cpfParent: string) => {
     // const tokenLS = localStorage.getItem('@TOKEN');
@@ -99,7 +107,14 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   return (
     <UserContext.Provider
-      value={{ getChildGrades, user, setUser, childs, classRoom, listClassRooms }}
+      value={{
+        getChildGrades,
+        user,
+        setUser,
+        childs,
+        classRoom,
+        listClassRooms,
+      }}
     >
       {children}
     </UserContext.Provider>
