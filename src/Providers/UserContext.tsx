@@ -46,13 +46,15 @@ interface iUserContext {
   childs: iUser[] | null | undefined;
   classRoom: iClassRoom[] | null | undefined;
   listClassRooms: () => Promise<void>;
+  studentGrade: iUser;
+  schoolGrades: (studentId: number) => Promise<void>;
 }
 
 interface iClassRoom {
   class: string;
   grade: iGrade;
-  schoolGrades: (studentId: number) => Promise<void>
-  studentGrade: iUser 
+  schoolGrades: (studentId: number) => Promise<void>;
+  studentGrade: iUser;
   // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
@@ -107,11 +109,11 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const [studentGrade, setStudentGrade] = useState<iUser>( {} as iUser);
+  const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
 
-  async function schoolGrades(studentId:number) {
-    const tokenLS = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzA0Mzc1LCJleHAiOjE2NzgzMDc5NzUsInN1YiI6IjEifQ.TQOErWivk3465zMMIRtiEK2_bDeEbL3nqBKLPU7-OR4"
-
+  async function schoolGrades(studentId: number) {
+    const tokenLS =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzE2OTUyLCJleHAiOjE2NzgzMjA1NTIsInN1YiI6IjEifQ.eRwpHIAA5cBMSSnKYkbe6u6ErOoxhSWzOQLIpunIBFk";
 
     try {
       const response = await api.get<iUser>(`/users/${1}`, {
@@ -120,11 +122,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
         },
       });
       setStudentGrade(response.data);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
-   
   }
 
   return (
@@ -136,8 +136,8 @@ export const UserProvider = ({ children }: iUserProvider) => {
         childs,
         schoolGrades,
         studentGrade,
-      
-       
+        classRoom,
+        listClassRooms,
       }}
     >
       {children}
