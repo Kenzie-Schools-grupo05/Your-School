@@ -28,6 +28,7 @@ export interface iUser {
     cpfParent?: string;
     class?: string;
     grades?: iGrade;
+    id: number;
 }
 
 export interface iGrade {
@@ -47,12 +48,17 @@ interface iUserContext {
     childs: iUser[] | null | undefined;
     classRoom: iClassRoom[] | null | undefined;
     listClassRooms: () => Promise<void>;
+    studentGrade: iUser;
+    schoolGrades: (studentId: number) => Promise<void>;
     submit: SubmitHandler<iLoginFormValues>;
 }
 
 interface iClassRoom {
     class: string;
     grade: iGrade;
+    schoolGrades: (studentId: number) => Promise<void>;
+    studentGrade: iUser;
+    // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
@@ -64,32 +70,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
     const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(
         null
     );
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.clear();
         return navigate("/");
-    };
-
-    const getChildGrades = async (cpfParent: string) => {
-        // const tokenLS = localStorage.getItem('@TOKEN');
-        // token abaixo somente para testes
-        const tokenLS =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MTI0NDY5LCJleHAiOjE2NzgxMjgwNjksInN1YiI6IjEifQ.SuHsZ-uZQztSHzFDHIdEPXPlQK0_uVdKxaw0oDTc9pg";
-        try {
-            const users = await api.get<iUser[]>(
-                `/users?cpfParent=${cpfParent}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${tokenLS}`,
-                    },
-                }
-            );
-            setChilds(users.data);
-        } catch (error) {
-            const currentError = error as AxiosError<iRequestError>;
-            console.log(currentError);
-        }
     };
 
     const listClassRooms = async () => {
@@ -109,18 +95,23 @@ export const UserProvider = ({ children }: iUserProvider) => {
         }
     };
 
-    const submit: SubmitHandler<iLoginFormValues> = async (data) => {
+    const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
+
+    async function schoolGrades(studentId: number) {
+        const tokenLS =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzE2OTUyLCJleHAiOjE2NzgzMjA1NTIsInN1YiI6IjEifQ.eRwpHIAA5cBMSSnKYkbe6u6ErOoxhSWzOQLIpunIBFk";
+
         try {
-            const response = await api.post("login", data);
-            localStorage.setItem("@TOKEN", response.data.accessToken);
-            setUser(response.data.user);
+            const response = await api.get<iUser>(`/users/${1}`, {
+                headers: {
+                    Authorization: `Bearer ${tokenLS}`,
+                },
+            });
+            setStudentGrade(response.data);
         } catch (error) {
-            // eslint-disable-next-line no-console
             console.log(error);
-        } finally {
-            navigate("/dashboard");
         }
-    };
+    }
 
     return (
         <UserContext.Provider
@@ -129,6 +120,8 @@ export const UserProvider = ({ children }: iUserProvider) => {
                 user,
                 setUser,
                 childs,
+                schoolGrades,
+                studentGrade,
                 classRoom,
                 listClassRooms,
                 submit,
