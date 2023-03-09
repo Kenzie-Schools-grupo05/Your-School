@@ -72,4 +72,8 @@ body{
     font-family: "Inter", sans-serif;
 }
 
+* {
+    font-family: "Inter", sans-serif;
+}
+
 `;
