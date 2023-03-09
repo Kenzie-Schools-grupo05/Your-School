@@ -51,6 +51,9 @@ interface iUserContext {
   studentGrade: iUser;
   schoolGrades: (studentId: number) => Promise<void>;
   submit: SubmitHandler<iLoginFormValues>;
+  getClassStudents: () => Promise<void>;
+  changeStudentGrade: (data: iGrade) => Promise<void>;
+  addStudentToClass: (data: iClassRoom) => Promise<void>;
 }
 
 interface iClassRoom {
@@ -98,7 +101,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const listClassRooms = async () => {
     const teacherToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODE3MTc0OCwiZXhwIjoxNjc4MTc1MzQ4LCJzdWIiOiIzIn0.WSVJ8DhNH3Gyx-tIjqeWBiwCOyobrgE8SZOpVqdb2FA";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODIxOTQ3NywiZXhwIjoxNjc4MjIzMDc3LCJzdWIiOiIzIn0.1938W4cktDp4RuDme2gO3gLHVgfgB8Y2LczBqTgIUNI";
 
     try {
       const response = await api.get<iClassRoom[]>("/classes", {
@@ -112,6 +115,51 @@ export const UserProvider = ({ children }: iUserProvider) => {
       console.log(currentError);
     }
   };
+
+  const getClassStudents = async () => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+
+    try {
+      const response = await api.get<iUser[]>("/users?class=502", {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const changeStudentGrade = async (data: iGrade) => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+
+    try {
+      const response = await api.patch<iUser>("/users/1", data, {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addStudentToClass = async (data: iClassRoom) => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+
+    try {
+      const response = await api.patch<iUser>("/users/1", data, {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
 
@@ -155,6 +203,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
         classRoom,
         listClassRooms,
         submit,
+        getClassStudents,
+        changeStudentGrade,
+        addStudentToClass
       }}
     >
       {children}

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const SelectClass = styled.button`
   padding: 24px 0;
   width: 100%;
+  max-width: 100%;
   margin-top: 75px;
   font-size: var(--btn-fontSize);
   color: var(--grey-100);
@@ -10,7 +11,7 @@ export const SelectClass = styled.button`
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
   cursor: pointer;
-  max-width: 1100px;
+  
   align-self: center;
 
   :hover {
@@ -20,9 +21,21 @@ export const SelectClass = styled.button`
 `;
 
 export const MainDash = styled.main`
-  max-width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
   padding: 0 39px;
+  gap: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-bottom: 10%;
+
+  > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: center;
+  }
 `;
