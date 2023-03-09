@@ -4,6 +4,15 @@ import { loginFormSchema } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
+import {
+    DivLoginBtn,
+    FormStyled,
+    InputField,
+    InputStyled,
+    LabelStyled,
+    LoginBtn,
+    TitleForm,
+} from "../../styles/form";
 
 export const FormLogin = () => {
     const {
@@ -13,7 +22,7 @@ export const FormLogin = () => {
     } = useForm<iLoginFormValues>({
         resolver: yupResolver(loginFormSchema),
         defaultValues: {
-            email: "",
+            cpf: "",
             password: "",
         },
     });
@@ -21,28 +30,36 @@ export const FormLogin = () => {
     const { submit } = useContext(UserContext);
 
     return (
-        <form onSubmit={handleSubmit(submit)}>
-            <fieldset>
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    placeholder="Digite seu email..."
-                    {...register("email")}
-                />
-                {errors.email && <p>{errors.email.message}</p>}
-            </fieldset>
+        <FormStyled onSubmit={handleSubmit(submit)}>
+            <TitleForm>Login</TitleForm>
+            <InputField>
+                <LabelStyled htmlFor="email">
+                    CPF<span> |</span>
+                </LabelStyled>
 
-            <fieldset>
-                <label htmlFor="password">Email</label>
-                <input
+                <InputStyled
+                    type="email"
+                    placeholder="Digite seu cpf"
+                    {...register("cpf")}
+                />
+                {errors.cpf && <p>{errors.cpf.message}</p>}
+            </InputField>
+
+            <InputField>
+                <LabelStyled htmlFor="password">
+                    Senha<span> |</span>
+                </LabelStyled>
+                <InputStyled
                     type="password"
-                    placeholder="Digite sua senha..."
+                    placeholder="Digite sua senha"
                     {...register("password")}
                 />
                 {errors.password && <p>{errors.password.message}</p>}
-            </fieldset>
+            </InputField>
 
-            <button type="submit">Entrar</button>
-        </form>
+            <DivLoginBtn>
+                <LoginBtn type="submit">Entrar</LoginBtn>
+            </DivLoginBtn>
+        </FormStyled>
     );
 };

@@ -1,4 +1,4 @@
 export interface iLoginFormValues {
-    email: string;
+    cpf: string;
     password: string;
 }
