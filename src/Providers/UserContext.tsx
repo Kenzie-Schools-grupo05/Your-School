@@ -112,6 +112,17 @@ export const UserProvider = ({ children }: iUserProvider) => {
             console.log(error);
         }
     }
+    const submit: SubmitHandler<iLoginFormValues> = async (data) => {
+        try {
+            const response = await api.post("login", data);
+            localStorage.setItem("@TOKEN", response.data.acessToken);
+            setUser(response.data.user);
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error);
+        } finally {
+            navigate("/dashboard");
+        }
 
     return (
         <UserContext.Provider
