@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import DashboardProfessor from "../pages/DashboardTeacher";
+import Login from "../pages/Login";
 
 const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={"login"} />
-      <Route path="/register" element={"register"} />
-      <Route path="/dashboard" element={<DashboardProfessor />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/teacher" element={<DashboardProfessor />} />
+            <Route path="/" element={<Login />} />
+        </Routes>
+    );
 };
 
 export default AppRoutes;

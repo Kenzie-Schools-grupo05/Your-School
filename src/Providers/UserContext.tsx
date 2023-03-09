@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { iLoginFormValues } from "../components/FormLogin/type";
 import api from "../services/api";
 
 interface iUserProvider {
@@ -26,6 +28,7 @@ export interface iUser {
   cpfParent?: string;
   class?: string;
   grades?: iGrade;
+  id: number;
 }
 
 export interface iGrade {
@@ -45,11 +48,20 @@ interface iUserContext {
   childs: iUser[] | null | undefined;
   classRoom: iClassRoom[] | null | undefined;
   listClassRooms: () => Promise<void>;
+  studentGrade: iUser;
+  schoolGrades: (studentId: number) => Promise<void>;
+  submit: SubmitHandler<iLoginFormValues>;
+  getClassStudents: () => Promise<void>;
+  changeStudentGrade: (data: iGrade) => Promise<void>;
+  addStudentToClass: (data: iClassRoom) => Promise<void>;
 }
 
 interface iClassRoom {
   class: string;
   grade: iGrade;
+  schoolGrades: (studentId: number) => Promise<void>;
+  studentGrade: iUser;
+  // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
@@ -62,8 +74,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
     null
   );
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    const navigate = useNavigate();
     localStorage.clear();
     return navigate("/");
   };
@@ -72,7 +85,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     // const tokenLS = localStorage.getItem('@TOKEN');
     // token abaixo somente para testes
     const tokenLS =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MTI0NDY5LCJleHAiOjE2NzgxMjgwNjksInN1YiI6IjEifQ.SuHsZ-uZQztSHzFDHIdEPXPlQK0_uVdKxaw0oDTc9pg";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcyNTM1LCJleHAiOjE2NzgzNzYxMzUsInN1YiI6IjEifQ.Bk_PrFUEGummqWS4XjxpEds5zzNF9rMGpLDXTp6Hyj0";
     try {
       const users = await api.get<iUser[]>(`/users?cpfParent=${cpfParent}`, {
         headers: {
@@ -103,7 +116,80 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
+  const getClassStudents = async () => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
 
+    try {
+      const response = await api.get<iUser[]>("/users?class=502", {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const changeStudentGrade = async (data: iGrade) => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+
+    try {
+      const response = await api.patch<iUser>("/users/1", data, {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addStudentToClass = async (data: iClassRoom) => {
+    const teacherToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+
+    try {
+      const response = await api.patch<iUser>("/users/1", data, {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
+
+  async function schoolGrades(studentId: number) {
+    const tokenLS =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcxOTkwLCJleHAiOjE2NzgzNzU1OTAsInN1YiI6IjEifQ.1sqClQSeGf4fnMPPtuwVNOJJRSd2hCx9_pSDsUosmOw";
+
+    try {
+      const response = await api.get<iUser>(`/users/${1}`, {
+        headers: {
+          Authorization: `Bearer ${tokenLS}`,
+        },
+      });
+      setStudentGrade(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const submit: SubmitHandler<iLoginFormValues> = async (data) => {
+    try {
+      const response = await api.post("login", data);
+      localStorage.setItem("@TOKEN", response.data.acessToken);
+      setUser(response.data.user);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    } finally {
+      navigate("/dashboard");
+    }
+  };
 
   return (
     <UserContext.Provider
@@ -112,8 +198,14 @@ export const UserProvider = ({ children }: iUserProvider) => {
         user,
         setUser,
         childs,
+        schoolGrades,
+        studentGrade,
         classRoom,
         listClassRooms,
+        submit,
+        getClassStudents,
+        changeStudentGrade,
+        addStudentToClass
       }}
     >
       {children}
