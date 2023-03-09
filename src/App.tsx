@@ -12,7 +12,7 @@ function App() {
             <GlobalStyle />
 
             <AppRoutes/>
-            <GradeStudent/>
+            <GradeStudent disabled={false}/>
         </div>
     );
 }
