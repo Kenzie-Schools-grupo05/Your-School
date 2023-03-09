@@ -9,8 +9,7 @@ interface iGradeParent {
   selectedChild: iUser | null | undefined;
 }
 
-export const GradeParent = ({ disabled, selectedChild }: iGradeParent) => {
-
+export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
   const isApproved = (subject: string[]) => {
     const total = subject.reduce((acc, currentValue) => {
       return Number(acc) + Number(currentValue);

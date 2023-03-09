@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const StyledDivGrade = styled.form`
-  width: 968px;
+  /* width: 968px; */
+  width: 320px;
   height: 743px;
   background-color: var(--grey-100);
   justify-content: center;

@@ -82,7 +82,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     // const tokenLS = localStorage.getItem('@TOKEN');
     // token abaixo somente para testes
     const tokenLS =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzY2MzI4LCJleHAiOjE2NzgzNjk5MjgsInN1YiI6IjEifQ.M-0EtJtNfnUMoKLa3fOObTEvJCQ8qQYWhgJv8L2Cj5E";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcyNTM1LCJleHAiOjE2NzgzNzYxMzUsInN1YiI6IjEifQ.Bk_PrFUEGummqWS4XjxpEds5zzNF9rMGpLDXTp6Hyj0";
     try {
       const users = await api.get<iUser[]>(`/users?cpfParent=${cpfParent}`, {
         headers: {
@@ -117,7 +117,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   async function schoolGrades(studentId: number) {
     const tokenLS =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzY2MzI4LCJleHAiOjE2NzgzNjk5MjgsInN1YiI6IjEifQ.M-0EtJtNfnUMoKLa3fOObTEvJCQ8qQYWhgJv8L2Cj5E";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcxOTkwLCJleHAiOjE2NzgzNzU1OTAsInN1YiI6IjEifQ.1sqClQSeGf4fnMPPtuwVNOJJRSd2hCx9_pSDsUosmOw";
 
     try {
       const response = await api.get<iUser>(`/users/${1}`, {
