@@ -87,6 +87,33 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const autoLogin = () => {
+      const navigate = useNavigate();
+      const userToken = localStorage.getItem("@TOKEN");
+      const userID = localStorage.getItem("@ID");
+
+      if (userToken) {
+        const userAuthorization = async () => {
+          try {
+            const response = await api.get<iUser>(`/users/${userID}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            });
+            setUser(response.data);
+            navigate("/dashboard");
+          } catch (error) {
+            const currentError = error as AxiosError;
+            console.log(currentError.response?.data);
+          }
+        };
+        userAuthorization();
+      }
+    };
+    autoLogin();
+  }, []);
+
   const handleLogout = () => {
     localStorage.clear();
     return navigate("/");
