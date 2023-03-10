@@ -85,15 +85,13 @@ export const UserProvider = ({ children }: iUserProvider) => {
     null
   );
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const autoLogin = () => {
-      const navigate = useNavigate();
       const userToken = localStorage.getItem("@TOKEN");
       const userID = localStorage.getItem("@ID");
 
       if (userToken) {
+        const navigate = useNavigate();
         const userAuthorization = async () => {
           try {
             const response = await api.get<iUser>(`/users/${userID}`, {
@@ -115,6 +113,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
   }, []);
 
   const handleLogout = () => {
+    const navigate = useNavigate();
     localStorage.clear();
     return navigate("/");
   };
@@ -216,6 +215,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
   }
 
   const submit: SubmitHandler<iLoginFormValues> = async (data) => {
+    const navigate = useNavigate();
     try {
       const response = await api.post("login", data);
       localStorage.setItem("@TOKEN", response.data.accessToken);
