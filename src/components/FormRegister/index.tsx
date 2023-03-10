@@ -73,15 +73,6 @@ export const FormRegister = () => {
                 />
                 {errors.cpf && <p>{errors.cpf.message}</p>}
             </InputField>
-            <InputField>
-                <LabelStyled>Email</LabelStyled>
-                <InputStyled
-                    type="email"
-                    placeholder="Digite seu email"
-                    {...register("type")}
-                />
-                {errors.type && <p>{errors.type.message}</p>}
-            </InputField>
 
             <SectionSelect>
                 <SelectField name="selectTypeAcc" id="selectTypeAcc">
