@@ -211,6 +211,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
             const response = await api.post("register", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
+            setUser(response.data.user);
         } catch (error) {
             console.log(error);
         } finally {

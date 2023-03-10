@@ -74,17 +74,19 @@ export const FormRegister = () => {
                 {errors.cpf && <p>{errors.cpf.message}</p>}
             </InputField>
 
-            <SectionSelect>
-                <SelectField name="selectTypeAcc" id="selectTypeAcc">
-                    <option hidden={true}>Selecionar tipo de conta</option>
+            {/* <SectionSelect>
+                <SelectField id="selectTypeAcc" placeholder="Selecione o tipo">
+                    <option>Selecionar tipo de conta</option>
                     <option value="Aluno">Aluno</option>
                     <option value="Pai">Pai</option>
                 </SelectField>
                 <ArrowDownImage src={arrowDown} />
-            </SectionSelect>
+            </SectionSelect> */}
 
             <DivSignUpLink>
-                <SignUpBtn className="signUpBtn">Cadastrar</SignUpBtn>
+                <SignUpBtn className="signUpBtn" type="submit">
+                    Cadastrar
+                </SignUpBtn>
             </DivSignUpLink>
         </FormStyled>
     );
