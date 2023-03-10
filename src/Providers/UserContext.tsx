@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify/dist/core/toast";
 import api from "../services/api";
 
 interface iUserProvider {
@@ -26,7 +27,6 @@ export interface iUser {
   cpfParent?: string;
   class?: string;
   grades?: iGrade;
-  id: number;
 }
 
 export interface iGrade {
@@ -46,14 +46,12 @@ interface iUserContext {
   childs: iUser[] | null | undefined;
   classRoom: iClassRoom[] | null | undefined;
   listClassRooms: () => Promise<void>;
+  handleLogout: () => void;
 }
 
 interface iClassRoom {
   class: string;
   grade: iGrade;
-  schoolGrades: (studentId: number) => Promise<void>
-  studentGrade: iUser 
-  // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
@@ -66,9 +64,37 @@ export const UserProvider = ({ children }: iUserProvider) => {
     null
   );
 
-  const handleLogout = () => {
-    const navigate = useNavigate();
+  useEffect(() => {
+    const autoLogin = () => {
+      const navigate = useNavigate();
+      const userToken = localStorage.getItem("@TOKEN");
+      const userID = localStorage.getItem("@ID");
+
+      if (userToken) {
+        const userAuthorization = async () => {
+          try {
+            const response = await api.get<iUser>(`/users/${userID}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            });
+            setUser(response.data);
+            navigate("/dashboard");
+          } catch (error) {
+            const currentError = error as AxiosError;
+            console.log(currentError.response?.data);
+          }
+        };
+        userAuthorization();
+      }
+    };
+    autoLogin();
+  }, []);
+
+  const handleLogout: () => void = () => {
+    const navigate: NavigateFunction = useNavigate();
     localStorage.clear();
+    toast.success("Desconectado");
     return navigate("/");
   };
 
@@ -107,26 +133,6 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const [studentGrade, setStudentGrade] = useState<iUser>( {} as iUser);
-
-  async function schoolGrades(studentId:number) {
-    const tokenLS = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzA0Mzc1LCJleHAiOjE2NzgzMDc5NzUsInN1YiI6IjEifQ.TQOErWivk3465zMMIRtiEK2_bDeEbL3nqBKLPU7-OR4"
-
-
-    try {
-      const response = await api.get<iUser>(`/users/${1}`, {
-        headers: {
-          Authorization: `Bearer ${tokenLS}`,
-        },
-      });
-      setStudentGrade(response.data);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-   
-  }
-
   return (
     <UserContext.Provider
       value={{
@@ -134,10 +140,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
         user,
         setUser,
         childs,
-        schoolGrades,
-        studentGrade,
-      
-       
+        classRoom,
+        listClassRooms,
+        handleLogout,
       }}
     >
       {children}

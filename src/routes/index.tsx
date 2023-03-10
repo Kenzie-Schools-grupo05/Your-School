@@ -1,11 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import DashboardProfessor from "../pages/DashboardTeacher";
+import { Dashboard } from "../pages/Dashboard";
+import { ProtectedRoutes } from "./protectedRoutes";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/teacher" element={<DashboardProfessor />} />
-      <Route path="/login" element={"login"} />
+      <Route path="/" element={"login"} />
+      <Route path="/dashboard" element={<ProtectedRoutes />}>
+        <Route index element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 };
