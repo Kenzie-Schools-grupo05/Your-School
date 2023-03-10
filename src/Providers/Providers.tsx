@@ -6,7 +6,9 @@ interface iChildren {
 }
 
 const Providers = ({ children }: iChildren) => (
-  <UserProvider>{children}</UserProvider>
+  <UserProvider>
+    {children}
+  </UserProvider>
 );
 
 export default Providers;
