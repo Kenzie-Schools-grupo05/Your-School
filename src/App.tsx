@@ -12,7 +12,7 @@ function App() {
 
             {/* <AppRoutes/> */}
             {/* <GradeStudent disabled={false}/> */}
-            <Dashboard />
+            <DashboardParent />
         </div>
     );
 }

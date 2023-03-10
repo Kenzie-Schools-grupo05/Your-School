@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { iUser, UserContext } from "../../Providers/UserContext";
 import logoBoletim from "../../assets/logoBoletim.png";
 
-import { StyledDivGrade } from "./style";
+import { StyledDivGrade, StyledDivGradeMobile, StylesDivFirstMobile } from "./style";
 
 interface iGradeParent {
   disabled: boolean;
@@ -25,11 +25,12 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
   return (
     <>
       {selectedChild ? (
-        <StyledDivGrade>
+        <StyledDivGrade >
           <h2>Boletim</h2>
-          <ul>
+
+          <ul className="grid-container">
             <li>
-              <span className="spanTitle">Matéria</span>
+              <span className="spanTitle teste">Matéria</span>
               <span className="spanTitle">1ª Trimestre</span>
               <span className="spanTitle">2ª Trimestre</span>
               <span className="spanTitle">3ª Trimestre</span>
@@ -178,6 +179,303 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
           </ul>
         </StyledDivGrade>
       ) : null}
+
+
+
+      <StylesDivFirstMobile>
+        {selectedChild ? (
+          <StyledDivGradeMobile>
+            <h2>Boletim</h2>
+
+            <ul className="grid-container">
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Matemática</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.mathematics.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.mathematics
+                      ? isApproved(selectedChild?.grades?.mathematics)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+
+
+
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Português</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.portuguese.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.portuguese
+                      ? isApproved(selectedChild?.grades?.portuguese)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+             
+              
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">História</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.history.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.history
+                      ? isApproved(selectedChild?.grades?.history)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+
+
+              
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Geografia</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.geography.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.geography
+                      ? isApproved(selectedChild?.grades?.geography)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+              
+
+                 
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Ciências</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.sciences.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.sciences
+                      ? isApproved(selectedChild?.grades?.sciences)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+
+              
+
+
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Artes</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.art.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.art
+                      ? isApproved(selectedChild?.grades?.art)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+              
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Educação Física</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.art.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.art
+                      ? isApproved(selectedChild?.grades?.art)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+              
+
+
+             
+
+              <li>
+                <div className="divDisciplinesMobile">
+                  <span className="spanDisciplineMobile">Educação Física</span>
+                  <div className="divTrimestreMobile">
+                    <span className="spanTitleMobile">1ª Tri</span>
+                    <span className="spanTitleMobile">2ª Tri</span>
+                    <span className="spanTitleMobile">3ª Tri</span>
+                    <span className="spanTitleMobile">Apro.</span>
+                  </div>
+
+                  <div className="divGradesMobile">
+                  {selectedChild?.grades?.art.map((grade) => (
+                      <input
+                        disabled={disabled}
+                        className="spanGradeMobile"
+                        defaultValue={grade}
+                        key={crypto.randomUUID()}
+                      />
+
+                    ))}
+                     <input
+                  disabled
+                  className="spanGradeMobile"
+                  defaultValue={
+                    selectedChild?.grades?.physicalEducation
+                      ? isApproved(selectedChild?.grades?.physicalEducation)
+                      : ""
+                  }
+                />
+                  </div>   
+                </div>
+              </li>
+
+            </ul>
+          </StyledDivGradeMobile>
+        ) : null}
+      </StylesDivFirstMobile> 
     </>
   );
 };

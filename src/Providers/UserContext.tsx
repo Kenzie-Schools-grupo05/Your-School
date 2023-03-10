@@ -85,7 +85,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     // const tokenLS = localStorage.getItem('@TOKEN');
     // token abaixo somente para testes
     const tokenLS =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcyNTM1LCJleHAiOjE2NzgzNzYxMzUsInN1YiI6IjEifQ.Bk_PrFUEGummqWS4XjxpEds5zzNF9rMGpLDXTp6Hyj0";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDc1NDAyLCJleHAiOjE2Nzg0NzkwMDIsInN1YiI6IjEifQ.P0RtyKXKFOaoPRIz-k91XxVzYJBU1I6Qe7thCJBe1Es"
     try {
       const users = await api.get<iUser[]>(`/users?cpfParent=${cpfParent}`, {
         headers: {
@@ -101,8 +101,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const listClassRooms = async () => {
     const teacherToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODIxOTQ3NywiZXhwIjoxNjc4MjIzMDc3LCJzdWIiOiIzIn0.1938W4cktDp4RuDme2gO3gLHVgfgB8Y2LczBqTgIUNI";
-
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDY0MTMzLCJleHAiOjE2Nzg0Njc3MzMsInN1YiI6IjEifQ.WmGALfcedQLuMT-x0pbAjOsb-DN3X9N4_6QWHEC0IWk"
     try {
       const response = await api.get<iClassRoom[]>("/classes", {
         headers: {

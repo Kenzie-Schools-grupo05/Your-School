@@ -35,7 +35,7 @@ export const DashboardParent = () => {
           <p>Perfil de responsável</p>
         </div>
       </section>
-      <section>
+      <section className="sectionContainer">
         <div id="selectContainer">
           <select
             onChange={(event) => setChildName(event.target.value)}
@@ -49,60 +49,7 @@ export const DashboardParent = () => {
             ))}
           </select>
         </div>
-        {/* <div id="grades">
-          <h2>Boletim</h2>
-          <ul>
-            <li>
-              <span>Matéria</span>
-              <span>1ª Bimestre</span>
-              <span>2ª Bimestre</span>
-              <span>3ª Bimestre</span>
-              <span>4ª Bimestre</span>
-            </li>
-            <li>
-              <span>Matemática</span>
-              {selectedChild?.grades?.mathematics.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-            <li>
-              <span>Português</span>
-              {selectedChild?.grades?.portuguese.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-            <li>
-              <span>História</span>
-              {selectedChild?.grades?.history.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-            <li>
-              <span>Geografia</span>
-              {selectedChild?.grades?.portuguese.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-            <li>
-              <span>Ciências</span>
-              {selectedChild?.grades?.sciences.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-            <li>
-              <span>Artes</span>
-              {selectedChild?.grades?.art.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-            <li>
-              <span>Educação Física</span>
-              {selectedChild?.grades?.physicalEducation.map((grade) => (
-                <span key={crypto.randomUUID()}>{grade}</span>
-              ))}
-            </li>
-          </ul>
-        </div> */}
+       
         <Grades disabled={false} selectedChild={selectedChild} />
       </section>
     </StyledMain>

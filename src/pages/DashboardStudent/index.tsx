@@ -7,7 +7,7 @@ export const DashboardStudent = () => {
     const { user, schoolGrades, studentGrade } = useContext(UserContext);
     useEffect(() => {
         schoolGrades(1)
-        // schoolGrades(user.id)
+        schoolGrades(user.id)
     }, [])
 
     localStorage.getItem('@TOKEN')
