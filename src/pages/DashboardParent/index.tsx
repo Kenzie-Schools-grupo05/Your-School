@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Grades } from "../../components/Grades";
+import { GradeStudent } from "../../components/GradeStudent";
 import { iUser, UserContext } from "../../Providers/UserContext";
+import { StyledMain } from "./style";
 
 export const DashboardParent = () => {
   const { user, setUser, childs, getChildGrades } = useContext(UserContext);
 
-  const [childName, setChildName] = useState<string | null>(null);
+  const [childName, setChildName] = useState<string>("");
   const [selectedChild, setSelectedChild] = useState<iUser | null | undefined>(
     null
   );
@@ -25,14 +28,19 @@ export const DashboardParent = () => {
   console.log(childs);
 
   return (
-    <main>
-      <section>
-        <p>Olá, {user?.name}</p>
-        <p>Perfil de responsável</p>
+    <StyledMain>
+      <section id="user__infos">
+        <div>
+          <h2>Olá, {user?.name}</h2>
+          <p>Perfil de responsável</p>
+        </div>
       </section>
       <section>
         <div id="selectContainer">
-          <select onChange={(event) => setChildName(event.target.value)}>
+          <select
+            onChange={(event) => setChildName(event.target.value)}
+            value={childName}
+          >
             <option value="">Selecione um filho(a)</option>
             {childs?.map((child) => (
               <option value={child.name} key={crypto.randomUUID()}>
@@ -41,7 +49,7 @@ export const DashboardParent = () => {
             ))}
           </select>
         </div>
-        <div id="grades">
+        {/* <div id="grades">
           <h2>Boletim</h2>
           <ul>
             <li>
@@ -94,8 +102,9 @@ export const DashboardParent = () => {
               ))}
             </li>
           </ul>
-        </div>
+        </div> */}
+        <Grades disabled={false} selectedChild={selectedChild} />
       </section>
-    </main>
+    </StyledMain>
   );
 };

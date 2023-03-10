@@ -3,6 +3,7 @@ import {useContext} from 'react';
 import Header from "../../components/Header";
 import { UserContext } from "../../Providers/UserContext";
 import { DashboardParent } from "../DashboardParent";
+import { DashboardStudent } from '../DashboardStudent';
 import DashboardProfessor from "../DashboardTeacher"
 
 export const Dashboard = () => {

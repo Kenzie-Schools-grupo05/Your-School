@@ -1,5 +1,3 @@
-import React from "react";
-import Header from "./components/Header";
 import AppRoutes from "./routes";
 import { GlobalStyle } from "./styles/globalStyles";
 
@@ -9,13 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { GradeStudent } from "./components/GradeStudent";
 
 import { DashboardParent } from "./pages/DashboardParent";
+import { Dashboard } from "./pages/Dashboard";
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
       <ToastContainer />
       <AppRoutes />
-      <GradeStudent />
+      {/* <GradeStudent /> */}
     </div>
   );
 }

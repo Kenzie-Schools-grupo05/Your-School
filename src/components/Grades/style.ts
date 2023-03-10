@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const StyledDivGrade = styled.form`
-  /* width: 968px; */
-  width: 320px;
+  width: 968px;
   height: 743px;
   background-color: var(--grey-100);
   justify-content: center;
   align-items: center;
 
   & h2 {
+    font-size: var(--title-1);
+    text-align: center;
+    padding: 20px;
   }
 
   & ul {
