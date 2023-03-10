@@ -7,6 +7,7 @@ export const StyledMain = styled.main`
 
     > div {
       margin: 0 auto;
+      text-align: center;
       width: fit-content;
       padding: 30px;
     }

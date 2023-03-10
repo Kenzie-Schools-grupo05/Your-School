@@ -5,14 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
 import {
-    DivLoginBtn,
     FormStyled,
     InputField,
     InputStyled,
     LabelStyled,
-    LoginBtn,
     TitleForm,
 } from "../../styles/form";
+import { DivLoginBtn, LoginBtn } from "./style";
 
 export const FormLogin = () => {
     const {
@@ -22,7 +21,7 @@ export const FormLogin = () => {
     } = useForm<iLoginFormValues>({
         resolver: yupResolver(loginFormSchema),
         defaultValues: {
-            cpf: "",
+            email: "",
             password: "",
         },
     });
@@ -34,15 +33,15 @@ export const FormLogin = () => {
             <TitleForm>Login</TitleForm>
             <InputField>
                 <LabelStyled htmlFor="email">
-                    CPF<span> |</span>
+                    Email<span> |</span>
                 </LabelStyled>
 
                 <InputStyled
                     type="email"
-                    placeholder="Digite seu cpf"
-                    {...register("cpf")}
+                    placeholder="Digite seu email"
+                    {...register("email")}
                 />
-                {errors.cpf && <p>{errors.cpf.message}</p>}
+                {errors.email && <p>{errors.email.message}</p>}
             </InputField>
 
             <InputField>
@@ -58,7 +57,9 @@ export const FormLogin = () => {
             </InputField>
 
             <DivLoginBtn>
-                <LoginBtn type="submit">Entrar</LoginBtn>
+                <LoginBtn type="submit" className="loginBtn">
+                    Entrar
+                </LoginBtn>
             </DivLoginBtn>
         </FormStyled>
     );

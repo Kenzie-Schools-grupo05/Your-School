@@ -12,7 +12,7 @@ export const Dashboard = () => {
   //Switch case para definir o que vai ser renderizado
   const renderSwitch = (type : string | undefined) => {
     switch(type) {
-      // case "student": return <DashboardStudent />;
+      case "student": return <DashboardStudent />;
       case "parent": return <DashboardParent />;
       case "professor": return <DashboardProfessor />;
     }
@@ -21,8 +21,7 @@ export const Dashboard = () => {
   return (
     <>
       <Header />
-      {/* {renderSwitch(user?.type)} */}
-      <DashboardParent />
+      {renderSwitch(user?.type)}
     </>
   );
 };

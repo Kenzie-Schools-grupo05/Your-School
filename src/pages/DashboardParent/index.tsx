@@ -14,8 +14,8 @@ export const DashboardParent = () => {
 
   useEffect(() => {
     const getChilds = async () => {
-      //await getChildGrades(user.cpf);
-      await getChildGrades("99999999999");
+      await getChildGrades(user?.cpf);
+      // await getChildGrades("99999999999");
     };
     getChilds();
   }, []);
@@ -24,8 +24,6 @@ export const DashboardParent = () => {
     const childFind = childs?.find((child) => child.name === childName);
     setSelectedChild(childFind);
   }, [childName]);
-
-  console.log(childs);
 
   return (
     <StyledMain>

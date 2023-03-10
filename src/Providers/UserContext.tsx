@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { iLoginFormValues } from "../components/FormLogin/type";
 import api from "../services/api";
 
@@ -42,7 +43,7 @@ export interface iGrade {
 }
 
 interface iUserContext {
-  getChildGrades: (cpfParent: string) => Promise<void>;
+  getChildGrades: (cpfParent: string | undefined) => Promise<void>;
   user: iUser | null;
   setUser: (props: iUser) => void;
   childs: iUser[] | null | undefined;
@@ -51,9 +52,11 @@ interface iUserContext {
   studentGrade: iUser;
   schoolGrades: (studentId: number) => Promise<void>;
   submit: SubmitHandler<iLoginFormValues>;
+  submitRegister: SubmitHandler<iRegisterFormValues>;
   getClassStudents: () => Promise<void>;
   changeStudentGrade: (data: iGrade) => Promise<void>;
   addStudentToClass: (data: iClassRoom) => Promise<void>;
+  handleLogout: () => void;
 }
 
 interface iClassRoom {
@@ -64,9 +67,18 @@ interface iClassRoom {
   // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
+export interface iRegisterFormValues {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  cpf: string;
+  type: string;
+}
+
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 export const UserProvider = ({ children }: iUserProvider) => {
+ 
   const [user, setUser] = useState<iUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [childs, setChilds] = useState<iUser[] | null | undefined>(null);
@@ -74,9 +86,35 @@ export const UserProvider = ({ children }: iUserProvider) => {
     null
   );
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const autoLogin = () => {
+      const userToken = localStorage.getItem("@TOKEN");
+      const userID = localStorage.getItem("@ID");
+
+      if (userToken) {
+        const navigate = useNavigate();
+        const userAuthorization = async () => {
+          try {
+            const response = await api.get<iUser>(`/users/${userID}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            });
+            setUser(response.data);
+            navigate("/dashboard");
+          } catch (error) {
+            const currentError = error as AxiosError;
+            console.log(currentError.response?.data);
+          }
+        };
+        userAuthorization();
+      }
+    };
+    autoLogin();
+  }, []);
 
   const handleLogout = () => {
+    const navigate = useNavigate();
     localStorage.clear();
     return navigate("/");
   };
@@ -86,6 +124,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
     // token abaixo somente para testes
     const tokenLS =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDc1NDAyLCJleHAiOjE2Nzg0NzkwMDIsInN1YiI6IjEifQ.P0RtyKXKFOaoPRIz-k91XxVzYJBU1I6Qe7thCJBe1Es"
+  const getChildGrades = async (cpfParent: string | undefined) => {
+    const tokenLS = localStorage.getItem("@TOKEN");
+
     try {
       const users = await api.get<iUser[]>(`/users?cpfParent=${cpfParent}`, {
         headers: {
@@ -158,7 +199,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
 
@@ -177,16 +218,31 @@ export const UserProvider = ({ children }: iUserProvider) => {
       console.log(error);
     }
   }
+
   const submit: SubmitHandler<iLoginFormValues> = async (data) => {
+    const navigate = useNavigate();
     try {
       const response = await api.post("login", data);
-      localStorage.setItem("@TOKEN", response.data.acessToken);
+      localStorage.setItem("@TOKEN", response.data.accessToken);
+      localStorage.setItem("@ID", response.data.user.id);
       setUser(response.data.user);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     } finally {
       navigate("/dashboard");
+    }
+  };
+
+  const submitRegister: SubmitHandler<iRegisterFormValues> = async (data) => {
+    try {
+      const response = await api.post("register", data);
+      localStorage.setItem("@TOKEN", response.data.accessToken);
+      localStorage.setItem("@ID", response.data.user.id);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      window.location.href = "/";
     }
   };
 
@@ -204,10 +260,15 @@ export const UserProvider = ({ children }: iUserProvider) => {
         submit,
         getClassStudents,
         changeStudentGrade,
-        addStudentToClass
+        addStudentToClass,
+        submitRegister,
+        handleLogout,
       }}
     >
       {children}
     </UserContext.Provider>
   );
+
+    }
+
 };
