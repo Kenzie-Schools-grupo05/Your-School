@@ -73,7 +73,7 @@ time, mark, audio, video {
 
 
 body{
-    background-color: #DDDDDD;
+    background-color: var(--grey-100);
     font-family: "Inter", sans-serif;
 }
 button{
