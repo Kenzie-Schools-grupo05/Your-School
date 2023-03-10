@@ -43,7 +43,7 @@ export interface iGrade {
 }
 
 interface iUserContext {
-    getChildGrades: (cpfParent: string) => Promise<void>;
+    getChildGrades: (cpfParent: string | undefined) => Promise<void>;
     user: iUser | null;
     setUser: (props: iUser) => void;
     childs: iUser[] | null | undefined;
@@ -56,6 +56,7 @@ interface iUserContext {
     getClassStudents: () => Promise<void>;
     changeStudentGrade: (data: iGrade) => Promise<void>;
     addStudentToClass: (data: iClassRoom) => Promise<void>;
+    handleLogout: () => void;
 }
 
 interface iClassRoom {
@@ -86,16 +87,44 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const autoLogin = () => {
+            const navigate = useNavigate();
+            const userToken = localStorage.getItem("@TOKEN");
+            const userID = localStorage.getItem("@ID");
+
+            if (userToken) {
+                const userAuthorization = async () => {
+                    try {
+                        const response = await api.get<iUser>(
+                            `/users/${userID}`,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${userToken}`,
+                                },
+                            }
+                        );
+                        setUser(response.data);
+                        navigate("/dashboard");
+                    } catch (error) {
+                        const currentError = error as AxiosError;
+                        console.log(currentError.response?.data);
+                    }
+                };
+                userAuthorization();
+            }
+        };
+        autoLogin();
+    }, []);
+
     const handleLogout = () => {
         localStorage.clear();
         return navigate("/");
     };
 
-    const getChildGrades = async (cpfParent: string) => {
-        // const tokenLS = localStorage.getItem('@TOKEN');
-        // token abaixo somente para testes
-        const tokenLS =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcyNTM1LCJleHAiOjE2NzgzNzYxMzUsInN1YiI6IjEifQ.Bk_PrFUEGummqWS4XjxpEds5zzNF9rMGpLDXTp6Hyj0";
+    const getChildGrades = async (cpfParent: string | undefined) => {
+        const tokenLS = localStorage.getItem("@TOKEN");
+
         try {
             const users = await api.get<iUser[]>(
                 `/users?cpfParent=${cpfParent}`,
@@ -198,11 +227,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
             setUser(response.data.user);
+            navigate("/dashboard");
         } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error);
         } finally {
-            navigate("/dashboard");
+            console.log("working");
         }
     };
 
@@ -211,11 +241,10 @@ export const UserProvider = ({ children }: iUserProvider) => {
             const response = await api.post("register", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
-            setUser(response.data.user);
         } catch (error) {
             console.log(error);
         } finally {
-            window.location.href = "/";
+            navigate("/");
         }
     };
 
@@ -235,6 +264,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
                 changeStudentGrade,
                 addStudentToClass,
                 submitRegister,
+                handleLogout,
             }}
         >
             {children}

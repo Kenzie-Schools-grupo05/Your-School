@@ -42,4 +42,8 @@ export const ContainerLogout = styled.div`
     justify-content: center;
 
     padding: 17px 0;
+
+    img:hover {
+        cursor: pointer;
+    }
 `;
