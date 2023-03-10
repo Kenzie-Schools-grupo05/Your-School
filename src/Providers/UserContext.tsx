@@ -78,6 +78,7 @@ export interface iRegisterFormValues {
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 export const UserProvider = ({ children }: iUserProvider) => {
+ 
   const [user, setUser] = useState<iUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [childs, setChilds] = useState<iUser[] | null | undefined>(null);
@@ -118,6 +119,11 @@ export const UserProvider = ({ children }: iUserProvider) => {
     return navigate("/");
   };
 
+  const getChildGrades = async (cpfParent: string) => {
+    // const tokenLS = localStorage.getItem('@TOKEN');
+    // token abaixo somente para testes
+    const tokenLS =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDc1NDAyLCJleHAiOjE2Nzg0NzkwMDIsInN1YiI6IjEifQ.P0RtyKXKFOaoPRIz-k91XxVzYJBU1I6Qe7thCJBe1Es"
   const getChildGrades = async (cpfParent: string | undefined) => {
     const tokenLS = localStorage.getItem("@TOKEN");
 
@@ -136,8 +142,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const listClassRooms = async () => {
     const teacherToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODIxOTQ3NywiZXhwIjoxNjc4MjIzMDc3LCJzdWIiOiIzIn0.1938W4cktDp4RuDme2gO3gLHVgfgB8Y2LczBqTgIUNI";
-
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDY0MTMzLCJleHAiOjE2Nzg0Njc3MzMsInN1YiI6IjEifQ.WmGALfcedQLuMT-x0pbAjOsb-DN3X9N4_6QWHEC0IWk"
     try {
       const response = await api.get<iClassRoom[]>("/classes", {
         headers: {
@@ -263,4 +268,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
       {children}
     </UserContext.Provider>
   );
+
+    }
+
 };
