@@ -16,6 +16,10 @@ export const GlobalStyle = createGlobalStyle`
     --grey-20: rgba(0, 0, 0, 0.8);
     --grey-0: #000000;
 
+    --negative-feedback: #E60000;
+    --positive-feedback: #168821;
+
+
     --title-1: 2rem;
 
     --linkRegister-fontSize: 1.5rem;
@@ -24,7 +28,8 @@ export const GlobalStyle = createGlobalStyle`
     --headLine: 1.375rem;
     --inputText: 1.2rem;
 
-    --text-1: 1rem
+    --text-1: 1rem;
+    --text-2: 0.8rem;
 
     --btn-fontSize: 2rem;
 
@@ -71,7 +76,9 @@ body{
     background-color: #DDDDDD;
     font-family: "Inter", sans-serif;
 }
-
+button{
+    cursor: pointer;
+}
 * {
     font-family: "Inter", sans-serif;
 }

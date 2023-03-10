@@ -34,6 +34,10 @@ export const InputField = styled.div`
     font-size: var(--text-1);
     font-weight: var(--Medium);
 
+    p {
+        color: var(--negative-feedback);
+    }
+
     @media (min-width: 500px) {
         width: 60%;
     }
@@ -55,35 +59,14 @@ export const InputStyled = styled.input`
 
     border: none;
 
+    &:focus {
+        outline: 0;
+    }
+
     @media (min-width: 500px) {
         &::placeholder {
             font-size: var(--inputText);
             font-weight: var(--Regular);
         }
     }
-`;
-
-export const DivLoginBtn = styled.div`
-    padding: 17px 20px;
-
-    border-radius: var(--radius-default);
-    width: 70%;
-    max-width: 410px;
-    display: flex;
-    justify-content: center;
-    background-color: var(--grey-70);
-
-    @media (min-width: 500px) {
-        width: 60%;
-    }
-`;
-
-export const LoginBtn = styled.button`
-    background-color: var(--grey-70);
-    color: var(--grey-100);
-
-    border: none;
-    border-radius: var(--radius-default);
-
-    font-size: var(--input-fontSize);
 `;
