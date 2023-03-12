@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { DivSignUpLink } from "../../pages/Login/style";
 import arrowDown from "../../assets/arrow-down.svg";
-import { iRegisterFormValues, UserContext } from "../../Providers/UserContext";
+import { UserContext } from "../../Providers/UserContext";
 import {
     FormStyled,
     InputField,
@@ -13,6 +13,7 @@ import {
 } from "../../styles/form";
 import { registerFormSchema } from "./schema";
 import { ArrowDownImage, SectionSelect, SelectField, SignUpBtn } from "./style";
+import { iRegisterFormValues } from "./type";
 
 export const FormRegister = () => {
     const {
@@ -74,14 +75,14 @@ export const FormRegister = () => {
                 {errors.cpf && <p>{errors.cpf.message}</p>}
             </InputField>
 
-            {/* <SectionSelect>
+            <SectionSelect>
                 <SelectField id="selectTypeAcc" placeholder="Selecione o tipo">
                     <option>Selecionar tipo de conta</option>
                     <option value="Aluno">Aluno</option>
                     <option value="Pai">Pai</option>
                 </SelectField>
                 <ArrowDownImage src={arrowDown} />
-            </SectionSelect> */}
+            </SectionSelect>
 
             <DivSignUpLink>
                 <SignUpBtn className="signUpBtn" type="submit">

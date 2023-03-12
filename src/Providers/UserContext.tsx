@@ -4,6 +4,7 @@ import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { iLoginFormValues } from "../components/FormLogin/type";
+import { iRegisterFormValues } from "../components/FormRegister/type";
 import api from "../services/api";
 
 interface iUserProvider {
@@ -67,14 +68,6 @@ interface iClassRoom {
     // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
-export interface iRegisterFormValues {
-    email: string;
-    password: string;
-    confirmPassword: string;
-    cpf: string;
-    type: string;
-}
-
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 export const UserProvider = ({ children }: iUserProvider) => {
@@ -89,11 +82,11 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
     useEffect(() => {
         const autoLogin = () => {
-            const navigate = useNavigate();
             const userToken = localStorage.getItem("@TOKEN");
             const userID = localStorage.getItem("@ID");
 
             if (userToken) {
+                // const navigate = useNavigate();
                 const userAuthorization = async () => {
                     try {
                         const response = await api.get<iUser>(
@@ -118,6 +111,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }, []);
 
     const handleLogout = () => {
+        // const navigate = useNavigate();
         localStorage.clear();
         return navigate("/");
     };
@@ -222,6 +216,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
 
     const submit: SubmitHandler<iLoginFormValues> = async (data) => {
+        // const navigate = useNavigate();
         try {
             const response = await api.post("login", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
@@ -232,13 +227,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
             // eslint-disable-next-line no-console
             console.log(error);
         } finally {
-            console.log("working");
         }
     };
 
     const submitRegister: SubmitHandler<iRegisterFormValues> = async (data) => {
         try {
-            const response = await api.post("register", data);
+            const response = await api.post("users", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
         } catch (error) {
