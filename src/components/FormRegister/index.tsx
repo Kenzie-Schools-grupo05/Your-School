@@ -13,7 +13,7 @@ import {
 } from "../../styles/form";
 import { registerFormSchema } from "./schema";
 import { ArrowDownImage, SectionSelect, SelectField, SignUpBtn } from "./style";
-import { iRegisterFormValues } from "./type";
+import { iRegisterFormValues } from "../../Providers/UserContext";
 
 export const FormRegister = () => {
     const {
