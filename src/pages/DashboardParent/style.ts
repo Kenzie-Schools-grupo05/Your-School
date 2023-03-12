@@ -17,12 +17,22 @@ export const StyledMain = styled.main`
       font-size: var(--title-1);
     }
   }
+  .sectionContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--grey-100);
+
+  }
 
   #selectContainer {
     width: fit-content;
     background-color: var(--color-secondary);
     margin: 20px auto;
     border-radius: 6px;
+
+
 
     > select {
       color: var(--grey-100);

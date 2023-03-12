@@ -4,7 +4,6 @@ import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { iLoginFormValues } from "../components/FormLogin/type";
-import { iRegisterFormValues } from "../components/FormRegister/type";
 import api from "../services/api";
 
 interface iUserProvider {
@@ -68,6 +67,14 @@ interface iClassRoom {
     // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
+export interface iRegisterFormValues {
+    email: string;
+    password: string;
+    confirmPassword: string;
+    cpf: string;
+    type: string;
+}
+
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 export const UserProvider = ({ children }: iUserProvider) => {
@@ -77,16 +84,13 @@ export const UserProvider = ({ children }: iUserProvider) => {
     const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(
         null
     );
-
     const navigate = useNavigate();
-
     useEffect(() => {
         const autoLogin = () => {
             const userToken = localStorage.getItem("@TOKEN");
             const userID = localStorage.getItem("@ID");
 
             if (userToken) {
-                // const navigate = useNavigate();
                 const userAuthorization = async () => {
                     try {
                         const response = await api.get<iUser>(
@@ -111,11 +115,14 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }, []);
 
     const handleLogout = () => {
-        // const navigate = useNavigate();
         localStorage.clear();
         return navigate("/");
     };
 
+    // const tokenLS = localStorage.getItem('@TOKEN');
+    // token abaixo somente para testes
+    const tokenLS =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDc1NDAyLCJleHAiOjE2Nzg0NzkwMDIsInN1YiI6IjEifQ.P0RtyKXKFOaoPRIz-k91XxVzYJBU1I6Qe7thCJBe1Es";
     const getChildGrades = async (cpfParent: string | undefined) => {
         const tokenLS = localStorage.getItem("@TOKEN");
 
@@ -136,9 +143,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     };
 
     const listClassRooms = async () => {
-        const teacherToken =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODIxOTQ3NywiZXhwIjoxNjc4MjIzMDc3LCJzdWIiOiIzIn0.1938W4cktDp4RuDme2gO3gLHVgfgB8Y2LczBqTgIUNI";
-
+        const teacherToken = localStorage.getItem("@TOKEN");
         try {
             const response = await api.get<iClassRoom[]>("/classes", {
                 headers: {
@@ -153,8 +158,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     };
 
     const getClassStudents = async () => {
-        const teacherToken =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+        const teacherToken = localStorage.getItem("@TOKEN");
 
         try {
             const response = await api.get<iUser[]>("/users?class=502", {
@@ -168,8 +172,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     };
 
     const changeStudentGrade = async (data: iGrade) => {
-        const teacherToken =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+        const teacherToken = localStorage.getItem("@TOKEN");
 
         try {
             const response = await api.patch<iUser>("/users/1", data, {
@@ -183,8 +186,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     };
 
     const addStudentToClass = async (data: iClassRoom) => {
-        const teacherToken =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByb2Zlc3NvckBtYWlsLmNvbSIsImlhdCI6MTY3ODM3NTAwNCwiZXhwIjoxNjc4Mzc4NjA0LCJzdWIiOiIzIn0.zOVJbyKovxbCl8C9uENfyQwbdRt6HOyXxs8kEBhzwyM";
+        const teacherToken = localStorage.getItem("@TOKEN");
 
         try {
             const response = await api.patch<iUser>("/users/1", data, {
@@ -216,29 +218,28 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
 
     const submit: SubmitHandler<iLoginFormValues> = async (data) => {
-        // const navigate = useNavigate();
         try {
             const response = await api.post("login", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
             setUser(response.data.user);
-            navigate("/dashboard");
         } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error);
         } finally {
+            navigate("/dashboard");
         }
     };
 
     const submitRegister: SubmitHandler<iRegisterFormValues> = async (data) => {
         try {
-            const response = await api.post("users", data);
+            const response = await api.post("register", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
         } catch (error) {
             console.log(error);
         } finally {
-            navigate("/");
+            window.location.href = "/";
         }
     };
 
