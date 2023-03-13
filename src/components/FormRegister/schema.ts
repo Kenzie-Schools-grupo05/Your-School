@@ -14,5 +14,10 @@ export const registerFormSchema = yup.object().shape({
         .required("Confirme sua senha")
         .oneOf([yup.ref("password")], "Senhas devem ser iguais"),
     cpf: yup.string().required("CPF obrigatório"),
+    // .matches(
+    //     /^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$/,
+    //     "CPF deve estar no formato 'xxx.xxx.xxx-xx'")
+    cpfParent: yup.string(),
+    // .required("CPF do responsável obrigatório")
     type: yup.string().required("Selecione o tipo de conta"),
 });

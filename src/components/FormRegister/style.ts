@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const SectionSelect = styled.section`
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
     position: relative;
     cursor: pointer;
 
