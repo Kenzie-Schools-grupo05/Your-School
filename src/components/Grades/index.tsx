@@ -740,7 +740,7 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
 
       <StylesDivFirstMobile>
         {selectedChild ? (
-          <StyledDivGradeMobile>
+          <StyledDivGradeMobile onSubmit={handleSubmit(submitChangeGrades)}>
             <h2>Boletim</h2>
 
             <ul>
