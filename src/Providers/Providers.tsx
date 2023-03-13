@@ -5,10 +5,9 @@ interface iChildren {
   children: ReactNode;
 }
 
-const Providers = ({ children }: iChildren) => (
+export const Providers = ({ children }: iChildren) => (
   <UserProvider>
     {children}
   </UserProvider>
 );
 
-export default Providers;

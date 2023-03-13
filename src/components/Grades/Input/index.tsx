@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
-import iInput from "./type";
+import {iInput} from "./type";
 
-const Input = ({ name, disabled, defaultValue, register, type, classStyle }: iInput) => (
+export const Input = ({ name, disabled, defaultValue, register, type, classStyle }: iInput) => (
   
     <input
       type={type}
@@ -14,4 +14,3 @@ const Input = ({ name, disabled, defaultValue, register, type, classStyle }: iIn
  
 );
 
-export default Input;

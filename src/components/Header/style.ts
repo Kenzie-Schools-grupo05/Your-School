@@ -30,10 +30,7 @@ export const MenuIconStyled = styled.img`
     left: 5%;
   }
 `;
-export const Logo = styled.img`
-  /* width: 234px;
-    height: 151px; */
-`;
+export const Logo = styled.img``;
 
 export const ContainerLogout = styled.div`
   background-color: var(--color-terciary);

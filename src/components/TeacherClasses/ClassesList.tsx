@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../Providers/UserContext";
 import { Grades } from "../Grades";
-import ClassCard from "./ClassCard";
-import NewStudents from "./NewStudents";
-import StudentCard from "./StudentCard";
+import { ClassCard } from "./ClassCard";
+import { NewStudents } from "./NewStudents";
+import { StudentCard } from "./StudentCard";
 import { MainDash, SelectClass } from "./style";
 
-const Classeslist = () => {
+export const Classeslist = () => {
   const {
     listClassRooms,
     classRoom,
@@ -57,7 +57,11 @@ const Classeslist = () => {
           <Grades disabled={false} selectedChild={studentGrade} />
         ) : null}
 
+<<<<<<< HEAD
         {showNewStudents && !studentGrade && !showStudents && !showClasses
+=======
+        {showNewStudents && !showClasses
+>>>>>>> 56f10654ba05f20fa2c152e363a8cf0b9a1be4f6
           ? newStudents?.map((student) => {
               return (
                 <NewStudents
@@ -72,5 +76,3 @@ const Classeslist = () => {
     </MainDash>
   );
 };
-
-export default Classeslist;

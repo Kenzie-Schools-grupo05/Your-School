@@ -6,7 +6,7 @@ interface iClassCard {
   name: string;
 }
 
-function ClassCard({ name }: iClassCard) {
+export const ClassCard = ({ name }: iClassCard) => {
   const { getClassStudents, getNoClassStudents } = useContext(UserContext);
 
   return (
@@ -23,6 +23,4 @@ function ClassCard({ name }: iClassCard) {
       </div>
     </ClassCardLi>
   );
-}
-
-export default ClassCard;
+};

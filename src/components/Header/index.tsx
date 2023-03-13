@@ -11,13 +11,12 @@ import {
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
 
-const Header = () => {
+export const Header = () => {
   const { handleLogout } = useContext(UserContext);
 
   return (
     <ContainerHeader>
       <ContainerLogoAndMenu>
-        {/* <MenuIconStyled src={menuIcon} alt="menu-access" /> */}
         <Logo src={logo} alt="website-logo" />
       </ContainerLogoAndMenu>
       <ContainerLogout>
@@ -31,4 +30,3 @@ const Header = () => {
     </ContainerHeader>
   );
 };
-export default Header;

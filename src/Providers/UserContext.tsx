@@ -4,7 +4,7 @@ import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { iLoginFormValues } from "../components/FormLogin/type";
 import { iGradeForm } from "../components/Grades/schema";
-import api from "../services/api";
+import { api } from "../services/api";
 import { toast } from "react-toastify";
 
 interface iUserProvider {
@@ -238,7 +238,6 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
-      console.log(response.data);
       toast.success("Nota alterada com sucesso!");
     } catch (error) {
       toast.error("Erro na alteração da nota!");
@@ -265,7 +264,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  async function schoolGrades(studentId: number | undefined) {
+  const schoolGrades = async (studentId: number | undefined) => {
     const tokenLS = localStorage.getItem("@TOKEN");
 
     try {
@@ -281,7 +280,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const submit: SubmitHandler<iLoginFormValues> = async (data) => {
     try {
@@ -332,8 +331,6 @@ export const UserProvider = ({ children }: iUserProvider) => {
   };
 
   const submitChangeGrades: SubmitHandler<iGradeForm> = (data) => {
-    console.log(data);
-
     const newObj: iGrade = {
       mathematics: [
         data.mathB1.toString(),
@@ -385,8 +382,10 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer: ${teacherToken}`,
         },
       });
+      toast.success("Estudante deletado com sucesso!");
     } catch (error) {
       console.error(error);
+      toast.error("Erro ao deletar estudante!");
     } finally {
       setLoading(false);
     }
@@ -414,15 +413,17 @@ export const UserProvider = ({ children }: iUserProvider) => {
         },
       });
       const filteredStudents = response.data.filter((user) => {
-        user.type === "student" && !user.class;
+        return user.type === "student" && !user.class;
       });
       setNewStudents(filteredStudents);
+
       setShowNewStudents(true);
       setShowClasses(false);
       setNewClass(defaultGrades);
+      toast.success("Estudante deletado com sucesso!");
     } catch (error) {
       console.error(error);
-      //toast nenhum aluno está sem turma!
+      toast.error("Nenhum estudante está sem turma!");
     }
   };
 
