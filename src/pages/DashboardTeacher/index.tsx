@@ -13,7 +13,6 @@ const DashboardProfessor = () => {
 
   return (
     <>
-      <Header />
       <UserInfo name="Cláudia" classRoom="2° ano ensino médio" />
       <Classeslist />
     </>
