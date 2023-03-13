@@ -1,5 +1,9 @@
 import AppRoutes from "./routes";
 import { GlobalStyle } from "./styles/globalStyles";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 import { GradeStudent } from "./components/GradeStudent";
 
@@ -13,6 +17,8 @@ function App() {
             <AppRoutes />
             {/* <GradeStudent disabled={false}/> */}
             {/* <Dashboard /> */}
+            <ToastContainer autoClose={2000} position='top-right' closeOnClick pauseOnHover/>
+
         </div>
     );
 }
