@@ -8,16 +8,16 @@ import { toast } from "react-toastify";
 
 
 interface iUserProvider {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 export interface iRequestError {
-  error: string;
-  response: iRequestErrorResponse | undefined;
+    error: string;
+    response: iRequestErrorResponse | undefined;
 }
 
 export interface iRequestErrorResponse {
-  data: string | undefined;
+    data: string | undefined;
 }
 
 export interface iUser {
@@ -30,102 +30,103 @@ export interface iUser {
   cpfParent?: string;
   class?: string;
   grades?: iGrade;
-  id: number;
+  id: number | undefined;
 
 }
 
 export interface iGrade {
-  mathematics: string[];
-  portuguese: string[];
-  sciences: string[];
-  history: string[];
-  geography: string[];
-  art: string[];
-  physicalEducation: string[];
+    mathematics: string[];
+    portuguese: string[];
+    sciences: string[];
+    history: string[];
+    geography: string[];
+    art: string[];
+    physicalEducation: string[];
 }
 
 interface iUserContext {
-  getChildGrades: (cpfParent: string | undefined) => Promise<void>;
-  user: iUser | null;
-  setUser: (props: iUser) => void;
-  childs: iUser[] | null | undefined;
-  classRoom: iClassRoom[] | null | undefined;
-  listClassRooms: () => Promise<void>;
-  studentGrade: iUser;
-  schoolGrades: (studentId: number) => Promise<void>;
-  submit: SubmitHandler<iLoginFormValues>;
-  submitRegister: SubmitHandler<iRegisterFormValues>;
-  getClassStudents: () => Promise<void>;
-  changeStudentGrade: (data: iGrade) => Promise<void>;
-  addStudentToClass: (data: iClassRoom) => Promise<void>;
-  handleLogout: () => void;
+    getChildGrades: (cpfParent: string | undefined) => Promise<void>;
+    user: iUser | null;
+    setUser: (props: iUser) => void;
+    childs: iUser[] | null | undefined;
+    classRoom: iClassRoom[] | null | undefined;
+    listClassRooms: () => Promise<void>;
+    studentGrade: iUser;
+    schoolGrades: (studentId: number | undefined) => Promise<void>;
+    submit: SubmitHandler<iLoginFormValues>;
+    submitRegister: SubmitHandler<iRegisterFormValues>;
+    getClassStudents: () => Promise<void>;
+    changeStudentGrade: (data: iGrade) => Promise<void>;
+    addStudentToClass: (data: iClassRoom) => Promise<void>;
+    handleLogout: () => void;
 }
 
 interface iClassRoom {
-  class: string;
-  grade: iGrade;
-  schoolGrades: (studentId: number) => Promise<void>;
-  studentGrade: iUser;
-  // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
+    class: string;
+    grade: iGrade;
+    schoolGrades: (studentId: number) => Promise<void>;
+    studentGrade: iUser;
+    // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export interface iRegisterFormValues {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  cpf: string;
-  type: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    cpf: string;
+    type: string;
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 export const UserProvider = ({ children }: iUserProvider) => {
-  const [user, setUser] = useState<iUser | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [childs, setChilds] = useState<iUser[] | null | undefined>(null);
-  const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(
-    null
-  );
-  const navigate = useNavigate();
-  useEffect(() => {
-    const autoLogin = () => {
-      const userToken = localStorage.getItem("@TOKEN");
-      const userID = localStorage.getItem("@ID");
+    const [user, setUser] = useState<iUser | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [childs, setChilds] = useState<iUser[] | null | undefined>(null);
+    const [classRoom, setClassRoom] = useState<iClassRoom[] | null | undefined>(
+        null
+    );
+    const navigate = useNavigate();
+    useEffect(() => {
+        const autoLogin = () => {
+            const userToken = localStorage.getItem("@TOKEN");
+            const userID = localStorage.getItem("@ID");
 
-      if (userToken) {
-        
-        const userAuthorization = async () => {
-          try {
-            const response = await api.get<iUser>(`/users/${userID}`, {
-              headers: {
-                Authorization: `Bearer ${userToken}`,
-              },
-            });
-            setUser(response.data);
-            navigate("/dashboard");
-          } catch (error) {
-            const currentError = error as AxiosError;
-            console.log(currentError.response?.data);
-          }
+            if (userToken) {
+                const userAuthorization = async () => {
+                    try {
+                        const response = await api.get<iUser>(
+                            `/users/${userID}`,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${userToken}`,
+                                },
+                            }
+                        );
+                        setUser(response.data);
+                        navigate("/dashboard");
+                    } catch (error) {
+                        const currentError = error as AxiosError;
+                        console.log(currentError.response?.data);
+                    }
+                };
+                userAuthorization();
+            }
         };
-        userAuthorization();
-      }
+        autoLogin();
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.clear();
+        return navigate("/");
     };
-    autoLogin();
-  }, []);
 
-  const handleLogout = () => {
-   
-    localStorage.clear();
-    return navigate("/");
-  };
-
-  // const tokenLS = localStorage.getItem('@TOKEN');
-  // token abaixo somente para testes
-  const tokenLS =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDc1NDAyLCJleHAiOjE2Nzg0NzkwMDIsInN1YiI6IjEifQ.P0RtyKXKFOaoPRIz-k91XxVzYJBU1I6Qe7thCJBe1Es";
-  const getChildGrades = async (cpfParent: string | undefined) => {
-    const tokenLS = localStorage.getItem("@TOKEN");
+    // const tokenLS = localStorage.getItem('@TOKEN');
+    // token abaixo somente para testes
+    const tokenLS =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4NDc1NDAyLCJleHAiOjE2Nzg0NzkwMDIsInN1YiI6IjEifQ.P0RtyKXKFOaoPRIz-k91XxVzYJBU1I6Qe7thCJBe1Es";
+    const getChildGrades = async (cpfParent: string | undefined) => {
+        const tokenLS = localStorage.getItem("@TOKEN");
 
     try {
       const users = await api.get<iUser[]>(`/users?cpfParent=${cpfParent}`, {
@@ -144,37 +145,37 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const listClassRooms = async () => {
-    const teacherToken = localStorage.getItem("@TOKEN");
-    try {
-      const response = await api.get<iClassRoom[]>("/classes", {
-        headers: {
-          Authorization: `Bearer ${teacherToken}`,
-        },
-      });
-      setClassRoom(response.data);
-    } catch (error) {
-      const currentError = error as AxiosError<iRequestError>;
-      console.log(currentError);
-    }
-  };
+    const listClassRooms = async () => {
+        const teacherToken = localStorage.getItem("@TOKEN");
+        try {
+            const response = await api.get<iClassRoom[]>("/classes", {
+                headers: {
+                    Authorization: `Bearer ${teacherToken}`,
+                },
+            });
+            setClassRoom(response.data);
+        } catch (error) {
+            const currentError = error as AxiosError<iRequestError>;
+            console.log(currentError);
+        }
+    };
 
-  const getClassStudents = async () => {
-    const teacherToken = localStorage.getItem("@TOKEN");
+    const getClassStudents = async () => {
+        const teacherToken = localStorage.getItem("@TOKEN");
 
-    try {
-      const response = await api.get<iUser[]>("/users?class=502", {
-        headers: {
-          Authorization: `Bearer ${teacherToken}`,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        try {
+            const response = await api.get<iUser[]>("/users?class=502", {
+                headers: {
+                    Authorization: `Bearer ${teacherToken}`,
+                },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-  const changeStudentGrade = async (data: iGrade) => {
-    const teacherToken = localStorage.getItem("@TOKEN");
+    const changeStudentGrade = async (data: iGrade) => {
+        const teacherToken = localStorage.getItem("@TOKEN");
 
     try {
       const response = await api.patch<iUser>("/users/1", data, {
@@ -190,8 +191,8 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const addStudentToClass = async (data: iClassRoom) => {
-    const teacherToken = localStorage.getItem("@TOKEN");
+    const addStudentToClass = async (data: iClassRoom) => {
+        const teacherToken = localStorage.getItem("@TOKEN");
 
     try {
       const response = await api.patch<iUser>("/users/1", data, {
@@ -206,9 +207,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
+    const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
 
-  async function schoolGrades(studentId: number) {
+  async function schoolGrades(studentId: number | undefined) {
     const tokenLS =  localStorage.getItem("@TOKEN");
       
     try {
@@ -255,26 +256,26 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  return (
-    <UserContext.Provider
-      value={{
-        getChildGrades,
-        user,
-        setUser,
-        childs,
-        schoolGrades,
-        studentGrade,
-        classRoom,
-        listClassRooms,
-        submit,
-        getClassStudents,
-        changeStudentGrade,
-        addStudentToClass,
-        submitRegister,
-        handleLogout,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider
+            value={{
+                getChildGrades,
+                user,
+                setUser,
+                childs,
+                schoolGrades,
+                studentGrade,
+                classRoom,
+                listClassRooms,
+                submit,
+                getClassStudents,
+                changeStudentGrade,
+                addStudentToClass,
+                submitRegister,
+                handleLogout,
+            }}
+        >
+            {children}
+        </UserContext.Provider>
+    );
 };
