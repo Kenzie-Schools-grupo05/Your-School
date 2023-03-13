@@ -10,6 +10,7 @@ export const StyledDivDashboardStudent = styled.div`
   #user__infos {
     border-bottom: 1px solid black;
     margin-bottom: 20px;
+    width: 100%;
 
     > div {
       margin: 0 auto;
