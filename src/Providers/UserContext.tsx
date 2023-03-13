@@ -421,24 +421,26 @@ export const UserProvider = ({ children }: iUserProvider) => {
             },
         };
 
-        try {
-            const response = await api.get<iUser[]>("/users", {
-                headers: {
-                    Authorization: `Bearer ${teacherToken}`,
-                },
-            });
-            const filteredStudents = response.data.filter((user) => {
-                user.type === "student" && !user.class;
-            });
-            setNewStudents(filteredStudents);
-            setShowNewStudents(true);
-            setShowClasses(false);
-            setNewClass(defaultGrades);
-        } catch (error) {
-            console.error(error);
-            //toast nenhum aluno está sem turma!
-        }
-    };
+    try {
+      const response = await api.get<iUser[]>("/users", {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+      const filteredStudents = response.data.filter((user) => {
+        return user.type === "student" && !user.class;
+      });
+      setNewStudents(filteredStudents)
+      console.log(filteredStudents);
+      
+      setShowNewStudents(true)
+      setShowClasses(false)
+      setNewClass(defaultGrades);
+    } catch (error) {
+      console.error(error);
+      //toast nenhum aluno está sem turma!
+    }
+  };
 
     return (
         <UserContext.Provider
