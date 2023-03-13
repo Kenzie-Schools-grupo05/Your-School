@@ -26,6 +26,7 @@ export const FormRegister = () => {
     } = useForm<iRegisterFormValues>({
         resolver: yupResolver(registerFormSchema),
         defaultValues: {
+            name: "",
             email: "",
             password: "",
             confirmPassword: "",
@@ -40,6 +41,17 @@ export const FormRegister = () => {
     return (
         <FormStyled onSubmit={handleSubmit(submitRegister)}>
             <TitleForm>Cadastro</TitleForm>
+            <InputField>
+                <LabelStyled>Nome</LabelStyled>
+                <InputStyled
+                    type="text"
+                    placeholder="Digite seu nome"
+                    {...register("name")}
+                />
+                {errors.name && (
+                    <ErrorStyled>{errors.name.message}</ErrorStyled>
+                )}
+            </InputField>
             <InputField>
                 <LabelStyled>Email</LabelStyled>
                 <InputStyled
