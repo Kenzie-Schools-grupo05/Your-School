@@ -1,24 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Grades } from "../../components/Grades";
 import { UserContext } from "../../Providers/UserContext";
+import {StyledDivDashboardStudent} from "./style"
 
 
 export const DashboardStudent = () => {
     const { user, schoolGrades, studentGrade } = useContext(UserContext);
+    console.log(studentGrade)
+
+
+
+    
     useEffect(() => {
-        schoolGrades(1)
-        schoolGrades(user.id)
+        
+        schoolGrades(user?.id)
     }, [])
 
     localStorage.getItem('@TOKEN')
 
 
     return (
-        <>
-            <p>Olá,{studentGrade?.name} </p>
-            <p>studentGrade.type - 3º ano - Ensino Médio</p>
+        <StyledDivDashboardStudent>
+                  <section id="user__infos">
+        <div>
+          <h2>Olá, {studentGrade?.name}</h2>
+          <p>Perfil do aluno</p>
+        </div>
+      </section>
             <Grades disabled={true} selectedChild={studentGrade} />
-        </>
+        </StyledDivDashboardStudent>
     )
 
 }
