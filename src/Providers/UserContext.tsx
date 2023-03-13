@@ -235,6 +235,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
       localStorage.setItem("@ID", response.data.user.id);
       toast.success("Cadastro feito com sucesso!");
     } catch (error) {
+      
       toast.error("Erro ao cadastrar");
     } finally {
       window.location.href = "/";
