@@ -33,7 +33,7 @@ export const FormLogin = () => {
             <TitleForm>Login</TitleForm>
             <InputField>
                 <LabelStyled htmlFor="email">
-                    Email<span> |</span>
+                    Email<span></span>
                 </LabelStyled>
 
                 <InputStyled
@@ -46,7 +46,7 @@ export const FormLogin = () => {
 
             <InputField>
                 <LabelStyled htmlFor="password">
-                    Senha<span> |</span>
+                    Senha<span></span>
                 </LabelStyled>
                 <InputStyled
                     type="password"
