@@ -73,6 +73,7 @@ export interface iRegisterFormValues {
     confirmPassword: string;
     cpf: string;
     type: string;
+    cpfParent: string;
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
@@ -236,10 +237,11 @@ export const UserProvider = ({ children }: iUserProvider) => {
             const response = await api.post("register", data);
             localStorage.setItem("@TOKEN", response.data.accessToken);
             localStorage.setItem("@ID", response.data.user.id);
+            console.log(response);
         } catch (error) {
             console.log(error);
         } finally {
-            window.location.href = "/";
+            navigate("/");
         }
     };
 
