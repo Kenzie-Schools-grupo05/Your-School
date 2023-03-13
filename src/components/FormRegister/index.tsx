@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { DivSignUpLink } from "../../pages/Login/style";
 import arrowDown from "../../assets/arrow-down.svg";
 import { UserContext } from "../../Providers/UserContext";
 import {
+    ErrorStyled,
     FormStyled,
     InputField,
     InputStyled,
@@ -16,6 +17,8 @@ import { ArrowDownImage, SectionSelect, SelectField, SignUpBtn } from "./style";
 import { iRegisterFormValues } from "../../Providers/UserContext";
 
 export const FormRegister = () => {
+    const [changeSelect, setChangeSelect] = useState("");
+
     const {
         register,
         handleSubmit,
@@ -28,6 +31,7 @@ export const FormRegister = () => {
             confirmPassword: "",
             cpf: "",
             type: "",
+            cpfParent: "",
         },
     });
 
@@ -43,7 +47,9 @@ export const FormRegister = () => {
                     placeholder="Digite seu email"
                     {...register("email")}
                 />
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && (
+                    <ErrorStyled>{errors.email.message}</ErrorStyled>
+                )}
             </InputField>
             <InputField>
                 <LabelStyled>Senha</LabelStyled>
@@ -52,7 +58,9 @@ export const FormRegister = () => {
                     placeholder="Digite sua senha"
                     {...register("password")}
                 />
-                {errors.password && <p>{errors.password.message}</p>}
+                {errors.password && (
+                    <ErrorStyled>{errors.password.message}</ErrorStyled>
+                )}
             </InputField>
             <InputField>
                 <LabelStyled>Confirmar senha</LabelStyled>
@@ -62,7 +70,7 @@ export const FormRegister = () => {
                     {...register("confirmPassword")}
                 />
                 {errors.confirmPassword && (
-                    <p>{errors.confirmPassword.message}</p>
+                    <ErrorStyled>{errors.confirmPassword.message}</ErrorStyled>
                 )}
             </InputField>
             <InputField>
@@ -72,17 +80,40 @@ export const FormRegister = () => {
                     placeholder="Digite seu CPF"
                     {...register("cpf")}
                 />
-                {errors.cpf && <p>{errors.cpf.message}</p>}
+                {errors.cpf && <ErrorStyled>{errors.cpf.message}</ErrorStyled>}
             </InputField>
 
             <SectionSelect>
-                <SelectField id="selectTypeAcc" placeholder="Selecione o tipo">
-                    <option>Selecionar tipo de conta</option>
-                    <option value="Aluno">Aluno</option>
-                    <option value="Pai">Pai</option>
+                <SelectField
+                    id="selectTypeAcc"
+                    placeholder="Selecione o tipo"
+                    {...register("type")}
+                    onChange={(event) => setChangeSelect(event.target.value)}
+                >
+                    <option value="">Selecionar tipo de conta</option>
+                    <option value="student">Estudante</option>
+                    <option value="parent">Responsável</option>
                 </SelectField>
                 <ArrowDownImage src={arrowDown} />
+                {errors.type && (
+                    <ErrorStyled>{errors.type.message}</ErrorStyled>
+                )}
             </SectionSelect>
+
+            {changeSelect === "student" ? (
+                <InputField>
+                    <LabelStyled>CPF do Responsável</LabelStyled>
+                    <InputStyled
+                        required
+                        type="text"
+                        placeholder="Digite o CPF do seu responsável"
+                        {...register("cpfParent")}
+                    />
+                    {errors.cpfParent && (
+                        <ErrorStyled>{errors.cpfParent.message}</ErrorStyled>
+                    )}
+                </InputField>
+            ) : null}
 
             <DivSignUpLink>
                 <SignUpBtn className="signUpBtn" type="submit">

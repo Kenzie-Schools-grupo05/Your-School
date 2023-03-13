@@ -68,11 +68,12 @@ interface iClassRoom {
 }
 
 export interface iRegisterFormValues {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  cpf: string;
-  type: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    cpf: string;
+    type: string;
+    cpfParent: string;
 }
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
@@ -238,7 +239,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
       
       toast.error("Erro ao cadastrar");
     } finally {
-      window.location.href = "/";
+      navigate("/");
     }
   };
 
