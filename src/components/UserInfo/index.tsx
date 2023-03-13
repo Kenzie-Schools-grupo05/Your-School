@@ -5,7 +5,7 @@ interface iUserInfo {
   classRoom: string;
 }
 
-const UserInfo = ({ name, classRoom }: iUserInfo) => {
+export const UserInfo = ({ name, classRoom }: iUserInfo) => {
   return (
     <>
       <UserInfoStyle>
@@ -15,5 +15,3 @@ const UserInfo = ({ name, classRoom }: iUserInfo) => {
     </>
   );
 };
-
-export default UserInfo;

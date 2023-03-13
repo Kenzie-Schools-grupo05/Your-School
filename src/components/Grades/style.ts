@@ -155,7 +155,7 @@ export const StyledDivGradeMobile = styled.form`
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      max-width: 1100px;
+      max-width: 1500px;
       width: 100%;
     }
   }

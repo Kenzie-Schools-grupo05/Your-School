@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --text-1: 1rem;
     --text-2: 0.8rem;
+    --text-3: 0.6rem
 
     --btn-fontSize: 1.3rem;
 

@@ -37,7 +37,9 @@ export const DashboardParent = () => {
             onChange={(event) => setChildName(event.target.value)}
             value={childName}
           >
-            <option value="">Selecione um filho(a)</option>
+            <option value="" hidden>
+              Selecione um filho(a)
+            </option>
             {childs?.map((child) => (
               <option value={child.name} key={crypto.randomUUID()}>
                 {child.name}

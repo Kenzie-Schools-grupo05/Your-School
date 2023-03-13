@@ -39,7 +39,7 @@ export const TitleForm = styled.h1`
 `;
 
 export const InputField = styled.div`
-  padding: 18px 20px;
+  padding: 18px 18px;
 
   border-radius: var(--radius-default);
 
@@ -55,36 +55,43 @@ export const InputField = styled.div`
   font-size: var(--text-1);
   font-weight: var(--Medium);
   user-select: none;
+  overflow: hidden;
+
+  max-height: 64px;
 
   /* p {
         color: var(--negative-feedback);
     } */
 
   @media (min-width: 500px) {
-    padding: 22px 20px;
+    padding: 22px 18px;
     width: 60%;
+    max-height: 20px;
   }
 `;
 export const ErrorStyled = styled.p`
+  display: flex;
+  align-items: center;
   color: var(--negative-feedback);
 `;
 export const LabelStyled = styled.label`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: row;
-  padding-right: 14px;
-  border-right: 2px solid gray;
+  padding-right: 8px;
 
   @media (min-width: 500px) {
+    max-width: 150px;
     font-size: var(--inputText);
   }
 `;
 
 export const InputStyled = styled.input`
-  /* width: 100%; */
-  max-width: 135px;
+  width: 100%;
+  max-width: 200px;
 
-  font-size: 0.9rem;
+  font-size: var(--inputText);
 
   border: none;
 
@@ -99,7 +106,7 @@ export const InputStyled = styled.input`
   }
 
   @media (min-width: 500px) {
-    max-width: 200px;
+    max-width: 200px
     &::placeholder {
       position: absolute;
       bottom: 0;

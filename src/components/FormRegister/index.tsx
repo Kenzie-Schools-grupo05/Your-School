@@ -104,7 +104,9 @@ export const FormRegister = () => {
           {...register("type")}
           onChange={(event) => setChangeSelect(event.target.value)}
         >
-          <option value="">Selecionar tipo de conta</option>
+          <option value="" hidden>
+            Selecionar tipo de conta
+          </option>
           <option value="student">Estudante</option>
           <option value="parent">Responsável</option>
         </SelectField>

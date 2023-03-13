@@ -5,7 +5,7 @@ export const SelectClass = styled.button`
   width: 70%;
   max-width: 100%;
   margin-top: 75px;
-  font-size: var(--btn-fontSize);
+  font-size: 1.2rem;
   color: var(--grey-100);
   border-radius: 8px;
   background-color: var(--color-secondary);

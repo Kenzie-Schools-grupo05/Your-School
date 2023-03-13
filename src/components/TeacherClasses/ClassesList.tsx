@@ -57,11 +57,7 @@ export const Classeslist = () => {
           <Grades disabled={false} selectedChild={studentGrade} />
         ) : null}
 
-<<<<<<< HEAD
         {showNewStudents && !studentGrade && !showStudents && !showClasses
-=======
-        {showNewStudents && !showClasses
->>>>>>> 56f10654ba05f20fa2c152e363a8cf0b9a1be4f6
           ? newStudents?.map((student) => {
               return (
                 <NewStudents

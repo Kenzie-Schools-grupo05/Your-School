@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
 import {
+  ErrorStyled,
   FormStyled,
   InputField,
   InputStyled,
@@ -39,7 +40,7 @@ export const FormLogin = () => {
           placeholder="Digite seu email"
           {...register("email")}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <ErrorStyled>{errors.email.message}</ErrorStyled>}
       </InputField>
 
       <InputField>
@@ -49,7 +50,9 @@ export const FormLogin = () => {
           placeholder="Digite sua senha"
           {...register("password")}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <ErrorStyled>{errors.password.message}</ErrorStyled>
+        )}
       </InputField>
 
       <DivLoginBtn>
