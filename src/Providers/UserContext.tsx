@@ -236,10 +236,13 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
+    
+      setStudentGrade(response.data)
       toast.success("Nota alterada com sucesso!");
     } catch (error) {
       toast.error("Erro na alteração da nota!");
     } finally {
+      setChangedGrades(null)
       setLoading(false);
     }
   };
@@ -428,6 +431,8 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
     }
   };
+
+  
 
   return (
     <UserContext.Provider
