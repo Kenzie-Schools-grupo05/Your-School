@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
-import Header from "../../components/Header";
-import Classeslist from "../../components/TeacherClasses/ClassesList";
-import UserInfo from "../../components/UserInfo";
+import { Header } from "../../components/Header";
+import { Classeslist } from "../../components/TeacherClasses/ClassesList";
+import { UserInfo } from "../../components/UserInfo";
 import { UserContext } from "../../Providers/UserContext";
 
-const DashboardProfessor = () => {
+export const DashboardProfessor = () => {
   const { listClassRooms, classRoom } = useContext(UserContext);
 
   useEffect(() => {
@@ -18,5 +18,3 @@ const DashboardProfessor = () => {
     </>
   );
 };
-
-export default DashboardProfessor;

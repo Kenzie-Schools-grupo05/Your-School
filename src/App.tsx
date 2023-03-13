@@ -1,17 +1,15 @@
-import AppRoutes from "./routes";
+import { AppRoutes } from "./routes";
 import { GlobalStyle } from "./styles/globalStyles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DashboardParent } from "./pages/DashboardParent";
 import { Dashboard } from "./pages/Dashboard";
-function App() {
+const App = () => {
   return (
     <div className="App">
       <GlobalStyle />
 
       <AppRoutes />
-      {/* <GradeStudent disabled={false}/> */}
-      {/* <Dashboard /> */}
       <ToastContainer
         autoClose={2000}
         position="top-right"
@@ -20,6 +18,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
 export default App;

@@ -8,7 +8,7 @@ interface iStudent {
   student: iUser
 }
 
-const StudentCard = ({ name, student, id }: iStudent) => {
+export const StudentCard = ({ name, student, id }: iStudent) => {
   const { showStudentGrade, deleteStudent } = useContext(UserContext)
 
   return (
@@ -22,5 +22,3 @@ const StudentCard = ({ name, student, id }: iStudent) => {
     </StudentCardLi>
   );
 };
-
-export default StudentCard;
