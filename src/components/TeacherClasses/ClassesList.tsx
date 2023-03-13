@@ -57,7 +57,7 @@ const Classeslist = () => {
         <Grades disabled={false} selectedChild={studentGrade} />
       ) : null}
 
-        { showNewStudents && !studentGrade && !showStudents && !showClasses ? 
+        { showNewStudents  && !showClasses ? 
           newStudents?.map((student) =>{
             return <NewStudents grade={newClass}  name={student.name} id={student.id} />
           }): null
