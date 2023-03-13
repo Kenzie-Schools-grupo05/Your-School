@@ -54,6 +54,14 @@ export const StylesDivFirstMobile = styled.div`
     gap: 10px;
     display: flex;
   }
+
+  & .divGradesMobile > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--grey-0);
+    height: 37px;
+  }
 `;
 
 export const StyledDivGradeMobile = styled.form`
