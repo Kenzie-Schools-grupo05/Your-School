@@ -26,7 +26,7 @@ export const FigureImgLogo = styled.figure`
 
     img {
         margin-top: 15px;
-        width: 290px;
+        width: 280px;
 
         @media (min-width: 500px) {
             width: 100%;
