@@ -42,7 +42,9 @@ export const FormRegister = () => {
         <FormStyled onSubmit={handleSubmit(submitRegister)}>
             <TitleForm>Cadastro</TitleForm>
             <InputField>
-                <LabelStyled>Nome</LabelStyled>
+                <LabelStyled>
+                    Nome<span></span>
+                </LabelStyled>
                 <InputStyled
                     type="text"
                     placeholder="Digite seu nome"
@@ -53,7 +55,9 @@ export const FormRegister = () => {
                 )}
             </InputField>
             <InputField>
-                <LabelStyled>Email</LabelStyled>
+                <LabelStyled>
+                    Email<span></span>
+                </LabelStyled>
                 <InputStyled
                     type="email"
                     placeholder="Digite seu email"
@@ -64,7 +68,9 @@ export const FormRegister = () => {
                 )}
             </InputField>
             <InputField>
-                <LabelStyled>Senha</LabelStyled>
+                <LabelStyled>
+                    Senha<span></span>
+                </LabelStyled>
                 <InputStyled
                     type="password"
                     placeholder="Digite sua senha"
@@ -75,7 +81,9 @@ export const FormRegister = () => {
                 )}
             </InputField>
             <InputField>
-                <LabelStyled>Confirmar senha</LabelStyled>
+                <LabelStyled>
+                    Confirmar senha<span></span>
+                </LabelStyled>
                 <InputStyled
                     type="password"
                     placeholder="Confirme sua senha"
@@ -86,7 +94,9 @@ export const FormRegister = () => {
                 )}
             </InputField>
             <InputField>
-                <LabelStyled>CPF</LabelStyled>
+                <LabelStyled>
+                    CPF<span></span>
+                </LabelStyled>
                 <InputStyled
                     type="text"
                     placeholder="Digite seu CPF"
@@ -114,9 +124,10 @@ export const FormRegister = () => {
 
             {changeSelect === "student" ? (
                 <InputField>
-                    <LabelStyled>CPF do Responsável</LabelStyled>
+                    <LabelStyled>
+                        CPF do Responsável<span></span>
+                    </LabelStyled>
                     <InputStyled
-                        required
                         type="text"
                         placeholder="Digite o CPF do seu responsável"
                         {...register("cpfParent")}
