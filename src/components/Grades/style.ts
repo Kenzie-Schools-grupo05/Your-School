@@ -193,7 +193,9 @@ flex-direction: column;
     display: flex;
     align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    max-width: 1100px;
+    width: 100%;
   }
 
   > button{

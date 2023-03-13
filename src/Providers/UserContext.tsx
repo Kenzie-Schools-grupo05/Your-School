@@ -384,8 +384,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer: ${teacherToken}`
         }
       })
+      toast.success("Estudante deletado com sucesso!");
+
     } catch (error) {
       console.error(error);
+      toast.error("Erro ao deletar estudante!");
+
     }finally{
       setLoading(false);
     }
@@ -419,9 +423,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
       setShowNewStudents(true)
       setShowClasses(false)
       setNewClass(defaultGrades);
+      toast.success("Estudante deletado com sucesso!");
+
     } catch (error) {
       console.error(error);
-      //toast nenhum aluno está sem turma!
+      toast.error("Nenhum estudante está sem turma!");
+
     }
   };
 
