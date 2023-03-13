@@ -34,10 +34,6 @@ export const InputField = styled.div`
     font-size: var(--text-1);
     font-weight: var(--Medium);
 
-    /* p {
-        color: var(--negative-feedback);
-    } */
-
     @media (min-width: 500px) {
         width: 60%;
     }
@@ -62,6 +58,9 @@ export const LabelStyled = styled.label`
         background-color: var(--grey-0);
     }
 
+    @media (min-width: 500px) {
+        font-size: var(--inputText);
+    }
     @media (min-width: 500px) {
         font-size: var(--text-1);
     }

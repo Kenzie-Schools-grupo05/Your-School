@@ -14,7 +14,6 @@ export const DashboardParent = () => {
   useEffect(() => {
     const getChilds = async () => {
       await getChildGrades(user?.cpf);
-      // await getChildGrades("99999999999");
     };
     getChilds();
   }, []);

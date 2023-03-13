@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { Dashboard } from "../pages/Dashboard";
-import Login from "../pages/Login";
+import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
-import ProtectedRoutes from "../pages/protectedRoutes";
+import { ProtectedRoutes } from "../pages/protectedRoutes";
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
@@ -15,5 +15,3 @@ const AppRoutes = () => {
     </Routes>
   );
 };
-
-export default AppRoutes;
