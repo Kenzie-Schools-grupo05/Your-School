@@ -413,9 +413,11 @@ export const UserProvider = ({ children }: iUserProvider) => {
         },
       });
       const filteredStudents = response.data.filter((user) => {
-        user.type === "student" && !user.class;
+        return user.type === "student" && !user.class;
       });
       setNewStudents(filteredStudents)
+      console.log(filteredStudents);
+      
       setShowNewStudents(true)
       setShowClasses(false)
       setNewClass(defaultGrades);
