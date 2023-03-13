@@ -106,8 +106,8 @@ export const InputStyled = styled.input`
   }
 
   @media (min-width: 500px) {
-    max-width: 200px
-    &::placeholder {
+    max-width: 200px;
+    & ::placeholder {
       position: absolute;
       bottom: 0;
       font-size: var(--inputText);

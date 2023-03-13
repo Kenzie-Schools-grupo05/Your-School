@@ -43,12 +43,13 @@ export const FormRegister = () => {
   });
 
   const { submitRegister } = useContext(UserContext);
-
   return (
     <FormStyled onSubmit={handleSubmit(submitRegister)}>
       <TitleForm>Cadastro</TitleForm>
       <InputField>
-        <LabelStyled>Nome</LabelStyled>
+        <LabelStyled>
+          Nome<span></span>
+        </LabelStyled>
         <InputStyled
           type="text"
           placeholder="Digite seu nome"
@@ -57,7 +58,9 @@ export const FormRegister = () => {
         {errors.name && <ErrorStyled>{errors.name.message}</ErrorStyled>}
       </InputField>
       <InputField>
-        <LabelStyled>Email</LabelStyled>
+        <LabelStyled>
+          Email<span></span>
+        </LabelStyled>
         <InputStyled
           type="email"
           placeholder="Digite seu email"
@@ -66,7 +69,9 @@ export const FormRegister = () => {
         {errors.email && <ErrorStyled>{errors.email.message}</ErrorStyled>}
       </InputField>
       <InputField>
-        <LabelStyled>Senha</LabelStyled>
+        <LabelStyled>
+          Senha<span></span>
+        </LabelStyled>
         <InputStyled
           type="password"
           placeholder="Digite sua senha"
@@ -77,7 +82,9 @@ export const FormRegister = () => {
         )}
       </InputField>
       <InputField>
-        <LabelStyled>Confirmar senha</LabelStyled>
+        <LabelStyled>
+          Confirmar senha<span></span>
+        </LabelStyled>
         <InputStyled
           type="password"
           placeholder="Confirme sua senha"
@@ -88,7 +95,9 @@ export const FormRegister = () => {
         )}
       </InputField>
       <InputField>
-        <LabelStyled>CPF</LabelStyled>
+        <LabelStyled>
+          CPF<span></span>
+        </LabelStyled>
         <InputStyled
           type="text"
           placeholder="Digite seu CPF"
@@ -96,23 +105,6 @@ export const FormRegister = () => {
         />
         {errors.cpf && <ErrorStyled>{errors.cpf.message}</ErrorStyled>}
       </InputField>
-
-      <SectionSelect>
-        <SelectField
-          id="selectTypeAcc"
-          placeholder="Selecione o tipo"
-          {...register("type")}
-          onChange={(event) => setChangeSelect(event.target.value)}
-        >
-          <option value="" hidden>
-            Selecionar tipo de conta
-          </option>
-          <option value="student">Estudante</option>
-          <option value="parent">Responsável</option>
-        </SelectField>
-        <ArrowDownImage src={arrowDown} />
-        {errors.type && <ErrorStyled>{errors.type.message}</ErrorStyled>}
-      </SectionSelect>
 
       {changeSelect === "student" ? (
         <InputField>
