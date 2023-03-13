@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { iNewStudent, UserContext } from "../../../Providers/UserContext"
 import { NewStudentCard } from "./style"
 
-const NewStudents = ({ name, grade, id }: iNewStudent) => {
+export const NewStudents = ({ name, grade, id }: iNewStudent) => {
     const { addStudentToClass } = useContext(UserContext)
 
     return (
@@ -12,5 +12,3 @@ const NewStudents = ({ name, grade, id }: iNewStudent) => {
         </NewStudentCard>
     )
 }
-
-export default NewStudents

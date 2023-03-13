@@ -31,8 +31,7 @@ export const MenuIconStyled = styled.img`
     }
 `;
 export const Logo = styled.img`
-    /* width: 234px;
-    height: 151px; */
+
 `;
 
 export const ContainerLogout = styled.div`
