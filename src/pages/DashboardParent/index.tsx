@@ -46,8 +46,8 @@ export const DashboardParent = () => {
             ))}
           </select>
         </div>
-       
-        <Grades disabled={false} selectedChild={selectedChild} />
+
+        <Grades disabled={true} selectedChild={selectedChild} />
       </section>
     </StyledMain>
   );
