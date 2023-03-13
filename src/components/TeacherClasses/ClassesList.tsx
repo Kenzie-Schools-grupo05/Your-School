@@ -18,7 +18,7 @@ const Classeslist = () => {
     studentGrade,
     showNewStudents,
     newClass,
-    newStudents
+    newStudents,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Classeslist = () => {
           showClasses ? hideClassesBtn() : showClassesBtn();
         }}
       >
-        {showClasses ? "Mostrar menos" : "Mostrar Turmas"}
+        {showClasses ? "Ocultar Turmas" : "Mostrar Turmas"}
       </SelectClass>
       <ul>
         {showClasses && !showStudents
@@ -53,15 +53,21 @@ const Classeslist = () => {
               );
             })
           : null}
-      {studentGrade && !showStudents && !showClasses ? (
-        <Grades disabled={false} selectedChild={studentGrade} />
-      ) : null}
+        {studentGrade && !showStudents && !showClasses ? (
+          <Grades disabled={false} selectedChild={studentGrade} />
+        ) : null}
 
-        { showNewStudents && !studentGrade && !showStudents && !showClasses ? 
-          newStudents?.map((student) =>{
-            return <NewStudents grade={newClass}  name={student.name} id={student.id} />
-          }): null
-      }
+        {showNewStudents && !studentGrade && !showStudents && !showClasses
+          ? newStudents?.map((student) => {
+              return (
+                <NewStudents
+                  grade={newClass}
+                  name={student.name}
+                  id={student.id}
+                />
+              );
+            })
+          : null}
       </ul>
     </MainDash>
   );

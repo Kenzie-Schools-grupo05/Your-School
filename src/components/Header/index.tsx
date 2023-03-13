@@ -21,7 +21,12 @@ const Header = () => {
         <Logo src={logo} alt="website-logo" />
       </ContainerLogoAndMenu>
       <ContainerLogout>
-        <img onClick={handleLogout} src={LogoutButton} alt="" />
+        <img
+          onClick={handleLogout}
+          src={LogoutButton}
+          alt=""
+          className="logoutBtnIcon"
+        />
       </ContainerLogout>
     </ContainerHeader>
   );
