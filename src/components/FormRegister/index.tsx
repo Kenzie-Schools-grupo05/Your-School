@@ -104,6 +104,7 @@ export const FormRegister = () => {
                 <InputField>
                     <LabelStyled>CPF do Responsável</LabelStyled>
                     <InputStyled
+                        required
                         type="text"
                         placeholder="Digite o CPF do seu responsável"
                         {...register("cpfParent")}
