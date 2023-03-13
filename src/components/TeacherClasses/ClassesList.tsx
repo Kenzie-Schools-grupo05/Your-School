@@ -1,10 +1,25 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../Providers/UserContext";
-import ClassCard from "../ClassCard";
+import { Grades } from "../Grades";
+import ClassCard from "./ClassCard";
+import NewStudents from "./NewStudents";
+import StudentCard from "./StudentCard";
 import { MainDash, SelectClass } from "./style";
 
 const Classeslist = () => {
-  const { listClassRooms, classRoom } = useContext(UserContext);
+  const {
+    listClassRooms,
+    classRoom,
+    showClasses,
+    showClassesBtn,
+    hideClassesBtn,
+    showStudents,
+    students,
+    studentGrade,
+    showNewStudents,
+    newClass,
+    newStudents
+  } = useContext(UserContext);
 
   useEffect(() => {
     listClassRooms();
@@ -12,11 +27,41 @@ const Classeslist = () => {
 
   return (
     <MainDash>
-      <SelectClass>Turmas</SelectClass>
+      <SelectClass
+        onClick={() => {
+          showClasses ? hideClassesBtn() : showClassesBtn();
+        }}
+      >
+        {showClasses ? "Mostrar menos" : "Mostrar Turmas"}
+      </SelectClass>
       <ul>
-        {classRoom?.map((element) => {
-          return <ClassCard name={element.class} key={element.class} />;
-        })}
+        {showClasses && !showStudents
+          ? classRoom?.map((element) => {
+              return <ClassCard name={element.class} key={element.class} />;
+            })
+          : null}
+
+        {!showClasses && showStudents
+          ? students?.map((student) => {
+              return (
+                <StudentCard
+                  name={student.name}
+                  id={student.id}
+                  student={student}
+                  key={student.id}
+                />
+              );
+            })
+          : null}
+      {studentGrade && !showStudents && !showClasses ? (
+        <Grades disabled={false} selectedChild={studentGrade} />
+      ) : null}
+
+        { showNewStudents && !studentGrade && !showStudents && !showClasses ? 
+          newStudents?.map((student) =>{
+            return <NewStudents grade={newClass}  name={student.name} id={student.id} />
+          }): null
+      }
       </ul>
     </MainDash>
   );

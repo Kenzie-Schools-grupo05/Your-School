@@ -21,9 +21,8 @@ export const SelectClass = styled.button`
 `;
 
 export const MainDash = styled.main`
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
-  width: 100%;
   padding: 0 39px;
   gap: 2rem;
   display: flex;
@@ -37,5 +36,9 @@ export const MainDash = styled.main`
     flex-direction: column;
     gap: 1.5rem;
     align-self: center;
+  }
+
+  @media (min-width: 678px) {
+    max-width: 1100px;
   }
 `;

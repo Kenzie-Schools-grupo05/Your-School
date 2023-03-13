@@ -3,6 +3,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { iLoginFormValues } from "../components/FormLogin/type";
+import { iGradeForm } from "../components/Grades/schema";
 import api from "../services/api";
 import { toast } from "react-toastify";
 
@@ -42,22 +43,50 @@ export interface iGrade {
   physicalEducation: string[];
 }
 
+export interface iNewGrade {
+  class: string;
+  grades: iGrade;
+}
+
+export interface iNewStudent {
+  id: number | undefined;
+  name: string;
+  grade: iNewGrade;
+}
+
 interface iUserContext {
   getChildGrades: (cpfParent: string | undefined) => Promise<void>;
   user: iUser | null;
   setUser: (props: iUser) => void;
   childs: iUser[] | null | undefined;
   classRoom: iClassRoom[] | null | undefined;
-  listClassRooms: () => Promise<void>;
-  studentGrade: iUser;
+  listClassRooms: () => Promise<void>
   schoolGrades: (studentId: number | undefined) => Promise<void>;
+  studentGrade: iUser | null;
+  showStudentGrade: (student: iUser) => void;
   submit: SubmitHandler<iLoginFormValues>;
   submitRegister: SubmitHandler<iRegisterFormValues>;
-  getClassStudents: () => Promise<void>;
-  changeStudentGrade: (data: iGrade) => Promise<void>;
-  addStudentToClass: (data: iClassRoom) => Promise<void>;
+  getClassStudents: (classRoom: string) => Promise<void>;
+  changeStudentGrade: (
+    data: iGrade,
+    id: number | undefined,
+    classRoom: string
+  ) => Promise<void>;
+  addStudentToClass: (id: number | undefined, data: iNewGrade) => Promise<void>;
   handleLogout: () => void;
   loading: boolean;
+  showClassesBtn: () => void;
+  hideClassesBtn: () => void;
+  showClasses: boolean;
+  showStudents: boolean;
+  students: iUser[] | null;
+  submitChangeGrades: SubmitHandler<iGradeForm>;
+  changedGrades: iGrade | null;
+  getNoClassStudents: (classRoom: string) => Promise<void>;
+  newStudents: iUser[] | null;
+  newClass: iNewGrade;
+  showNewStudents: boolean;
+  deleteStudent: (id: number | undefined) => Promise<void>
 }
 
 interface iClassRoom {
@@ -87,6 +116,15 @@ export const UserProvider = ({ children }: iUserProvider) => {
     null
   );
   const [loading, setLoading] = useState(false);
+  const [studentGrade, setStudentGrade] = useState<iUser | null>(null);
+  const [showClasses, setShowClasses] = useState(false);
+  const [students, setStudents] = useState<iUser[] | null>(null);
+  const [showStudents, setShowStudents] = useState(false);
+  const [changedGrades, setChangedGrades] = useState<iGrade | null>(null);
+  const [newStudents, setNewStudents] = useState<iUser[] | null>(null);
+  const [newClass, setNewClass] = useState<iNewGrade>({} as iNewGrade);
+  const [showNewStudents, setShowNewStudents] = useState(false)
+
   const navigate = useNavigate();
   useEffect(() => {
     const autoLogin = () => {
@@ -159,16 +197,19 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const getClassStudents = async () => {
+  const getClassStudents = async (classRoom: string) => {
     const teacherToken = localStorage.getItem("@TOKEN");
 
     try {
       setLoading(true);
-      const response = await api.get<iUser[]>("/users?class=502", {
+      const response = await api.get<iUser[]>(`/users?class=${classRoom}`, {
         headers: {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
+      setStudents(response.data);
+      setShowClasses(false);
+      setShowStudents(true);
     } catch (error) {
       toast.error("Erro ao carregar a requisição!");
     } finally {
@@ -176,16 +217,26 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const changeStudentGrade = async (data: iGrade) => {
+  const changeStudentGrade = async (
+    data: iGrade,
+    id: number | undefined,
+    classRoom: string
+  ) => {
     const teacherToken = localStorage.getItem("@TOKEN");
+
+    const newGrade: iNewGrade = {
+      class: classRoom,
+      grades: data,
+    };
 
     try {
       setLoading(true);
-      const response = await api.patch<iUser>("/users/1", data, {
+      const response = await api.patch<iUser>(`/users/${id}`, newGrade, {
         headers: {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
+      console.log(response.data);
       toast.success("Nota alterada com sucesso!");
     } catch (error) {
       toast.error("Erro na alteração da nota!");
@@ -194,12 +245,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
     }
   };
 
-  const addStudentToClass = async (data: iClassRoom) => {
+  const addStudentToClass = async (id: number | undefined, data: iNewGrade) => {
     const teacherToken = localStorage.getItem("@TOKEN");
 
     try {
       setLoading(true);
-      const response = await api.patch<iUser>("/users/1", data, {
+      const response = await api.patch<iUser>(`/users/${id}`, data, {
         headers: {
           Authorization: `Bearer ${teacherToken}`,
         },
@@ -211,8 +262,6 @@ export const UserProvider = ({ children }: iUserProvider) => {
       setLoading(false);
     }
   };
-
-  const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
 
   async function schoolGrades(studentId: number | undefined) {
     const tokenLS = localStorage.getItem("@TOKEN");
@@ -260,6 +309,119 @@ export const UserProvider = ({ children }: iUserProvider) => {
     } finally {
       setLoading(false);
       navigate("/");
+
+    }
+  };
+
+  const showClassesBtn = () => {
+    setShowStudents(false);
+    setShowClasses(true);
+    setShowNewStudents(false)
+    setStudentGrade(null);
+  };
+  const hideClassesBtn = () => {
+    setShowClasses(false);
+    setStudentGrade(null);
+  };
+
+  const showStudentGrade = (student: iUser) => {
+    setStudentGrade(student);
+    setShowClasses(false);
+    setShowStudents(false);
+  };
+
+  const submitChangeGrades: SubmitHandler<iGradeForm> = (data) => {
+    console.log(data);
+
+    const newObj: iGrade = {
+      mathematics: [
+        data.mathB1.toString(),
+        data.mathB2.toString(),
+        data.mathB3.toString(),
+      ],
+      portuguese: [
+        data.portB1.toString(),
+        data.portB2.toString(),
+        data.portB3.toString(),
+      ],
+      sciences: [
+        data.sciencesB1.toString(),
+        data.sciencesB2.toString(),
+        data.sciencesB3.toString(),
+      ],
+      history: [
+        data.historyB1.toString(),
+        data.historyB2.toString(),
+        data.historyB3.toString(),
+      ],
+      geography: [
+        data.geographyB1.toString(),
+        data.geographyB2.toString(),
+        data.geographyB3.toString(),
+      ],
+      art: [
+        data.artB1.toString(),
+        data.artB2.toString(),
+        data.artB3.toString(),
+      ],
+      physicalEducation: [
+        data.physicalEduB1.toString(),
+        data.physicalEduB2.toString(),
+        data.physicalEduB3.toString(),
+      ],
+    };
+
+    setChangedGrades(newObj);
+  };
+
+  const  deleteStudent = async (id: number | undefined) => {
+    const teacherToken = localStorage.getItem("@TOKEN");
+
+    try {
+      setLoading(true);
+      const response = await api.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer: ${teacherToken}`
+        }
+      })
+    } catch (error) {
+      console.error(error);
+    }finally{
+      setLoading(false);
+    }
+  }
+
+  const getNoClassStudents = async (classRoom: string) => {
+    const teacherToken = localStorage.getItem("@TOKEN");
+    const defaultGrades: iNewGrade = {
+      class: classRoom,
+      grades: {
+        mathematics: ["", "", ""],
+        portuguese: ["", "", ""],
+        sciences: ["", "", ""],
+        history: ["", "", ""],
+        geography: ["", "", ""],
+        art: ["", "", ""],
+        physicalEducation: ["", "", ""],
+      },
+    };
+
+    try {
+      const response = await api.get<iUser[]>("/users", {
+        headers: {
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      });
+      const filteredStudents = response.data.filter((user) => {
+        user.type === "student" && !user.class;
+      });
+      setNewStudents(filteredStudents)
+      setShowNewStudents(true)
+      setShowClasses(false)
+      setNewClass(defaultGrades);
+    } catch (error) {
+      console.error(error);
+      //toast nenhum aluno está sem turma!
     }
   };
 
@@ -280,7 +442,20 @@ export const UserProvider = ({ children }: iUserProvider) => {
         addStudentToClass,
         submitRegister,
         handleLogout,
+        showClassesBtn,
+        hideClassesBtn,
+        showClasses,
+        showStudents,
+        students,
+        showStudentGrade,
+        changedGrades,
+        submitChangeGrades,
+        getNoClassStudents,
+        newClass,
+        newStudents,
+        showNewStudents,
         loading,
+        deleteStudent
       }}
     >
       {children}

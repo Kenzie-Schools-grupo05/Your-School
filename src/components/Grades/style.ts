@@ -133,6 +133,8 @@ export const StylesDivFirstMobile = styled.div`
 
 // estilização formulario mobile
 export const StyledDivGradeMobile = styled.form`
+display: flex;
+flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -192,6 +194,27 @@ export const StyledDivGradeMobile = styled.form`
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
+  }
+
+  > button{
+    align-self: center;
+    margin-top: 1.5rem;
+    padding: 11px 0;
+    align-self: center;
+    width: 100%;
+    max-width: 360px;
+    background-color: var(--grey-90);
+    border: 1px solid var(--grey-90);
+    color: var(--grey-70);
+    font-size: var(--btn-fontSize);
+    border-radius: 8px;
+ 
+  }
+
+  > button:hover{
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    color: var(--grey-100);
   }
 
   @media (min-width: 1024px) {
