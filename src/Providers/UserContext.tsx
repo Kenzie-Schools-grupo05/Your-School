@@ -392,19 +392,23 @@ export const UserProvider = ({ children }: iUserProvider) => {
     const deleteStudent = async (id: number | undefined) => {
         const teacherToken = localStorage.getItem("@TOKEN");
 
-        try {
-            setLoading(true);
-            const response = await api.delete(`/users/${id}`, {
-                headers: {
-                    Authorization: `Bearer: ${teacherToken}`,
-                },
-            });
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
+    try {
+      setLoading(true);
+      const response = await api.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer: ${teacherToken}`
         }
-    };
+      })
+      toast.success("Estudante deletado com sucesso!");
+
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao deletar estudante!");
+
+    }finally{
+      setLoading(false);
+    }
+  }
 
     const getNoClassStudents = async (classRoom: string) => {
         const teacherToken = localStorage.getItem("@TOKEN");
@@ -436,9 +440,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
       setShowNewStudents(true)
       setShowClasses(false)
       setNewClass(defaultGrades);
+      toast.success("Estudante deletado com sucesso!");
+
     } catch (error) {
       console.error(error);
-      //toast nenhum aluno está sem turma!
+      toast.error("Nenhum estudante está sem turma!");
+
     }
   };
 
