@@ -54,7 +54,7 @@ export const Classeslist = () => {
             })
           : null}
         {studentGrade && !showStudents && !showClasses ? (
-          <Grades disabled={false} />
+          <Grades disabled={false} selectedChild={studentGrade} />
         ) : null}
 
         {showNewStudents && !showClasses
