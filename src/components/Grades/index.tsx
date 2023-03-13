@@ -12,6 +12,8 @@ interface iGradeParent {
 }
 
 export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
+  const { user } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -756,33 +758,33 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
 
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.mathematics ? (
-                       <>
-                       <Input
-                         type="text"
-                         disabled={disabled}
-                         classStyle="spanGradeMobile"
-                         defaultValue={selectedChild.grades.mathematics[0]}
-                         name="mathB1"
-                         register={register}
-                       />
-                       <Input
-                         type="text"
-                         disabled={disabled}
-                         classStyle="spanGradeMobile"
-                         defaultValue={selectedChild.grades.mathematics[1]}
-                         name="mathB2"
-                         register={register}
-                       />
-                       <Input
-                         type="text"
-                         disabled={disabled}
-                         classStyle="spanGradeMobile"
-                         defaultValue={selectedChild.grades.mathematics[2]}
-                         name="mathB3"
-                         register={register}
-                       />
-                     </>
-                    ): null}
+                      <>
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.mathematics[0]}
+                          name="mathB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.mathematics[1]}
+                          name="mathB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.mathematics[2]}
+                          name="mathB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -808,33 +810,33 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
 
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.portuguese ? (
-                       <>
-                       <Input
-                         type="text"
-                         disabled={disabled}
-                         classStyle="spanGradeMobile"
-                         defaultValue={selectedChild.grades.portuguese[0]}
-                         name="portB1"
-                         register={register}
-                       />
-                       <Input
-                         type="text"
-                         disabled={disabled}
-                         classStyle="spanGradeMobile"
-                         defaultValue={selectedChild.grades.portuguese[1]}
-                         name="portB2"
-                         register={register}
-                       />
-                       <Input
-                         type="text"
-                         disabled={disabled}
-                         classStyle="spanGradeMobile"
-                         defaultValue={selectedChild.grades.portuguese[2]}
-                         name="portB3"
-                         register={register}
-                       />
-                     </>
-                    ): null}
+                      <>
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.portuguese[0]}
+                          name="portB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.portuguese[1]}
+                          name="portB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.portuguese[2]}
+                          name="portB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -861,32 +863,32 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.history ? (
                       <>
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.history[0]}
-                        name="historyB1"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.history[1]}
-                        name="historyB2"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.history[2]}
-                        name="historyB3"
-                        register={register}
-                      />
-                    </>
-                    ): null}
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.history[0]}
+                          name="historyB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.history[1]}
+                          name="historyB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.history[2]}
+                          name="historyB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -913,32 +915,32 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.geography ? (
                       <>
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.geography[0]}
-                        name="geographyB1"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.geography[1]}
-                        name="geographyB2"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.geography[2]}
-                        name="geographyB3"
-                        register={register}
-                      />
-                    </>
-                    ): null}
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.geography[0]}
+                          name="geographyB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.geography[1]}
+                          name="geographyB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.geography[2]}
+                          name="geographyB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -965,32 +967,32 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.sciences ? (
                       <>
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.sciences[0]}
-                        name="sciencesB1"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.sciences[1]}
-                        name="sciencesB2"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.sciences[2]}
-                        name="sciencesB3"
-                        register={register}
-                      />
-                    </>
-                    ): null}
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.sciences[0]}
+                          name="sciencesB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.sciences[1]}
+                          name="sciencesB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.sciences[2]}
+                          name="sciencesB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -1017,32 +1019,32 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.art ? (
                       <>
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.art[0]}
-                        name="artB1"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.art[1]}
-                        name="artB2"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={selectedChild.grades.art[2]}
-                        name="artB3"
-                        register={register}
-                      />
-                    </>
-                    ): null}
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.art[0]}
+                          name="artB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.art[1]}
+                          name="artB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={selectedChild.grades.art[2]}
+                          name="artB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -1069,38 +1071,38 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                   <div className="divGradesMobile">
                     {selectedChild?.grades?.physicalEducation ? (
                       <>
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={
-                          selectedChild.grades.physicalEducation[0]
-                        }
-                        name="physicalEduB1"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={
-                          selectedChild.grades.physicalEducation[1]
-                        }
-                        name="physicalEduB2"
-                        register={register}
-                      />
-                      <Input
-                        type="text"
-                        disabled={disabled}
-                        classStyle="spanGradeMobile"
-                        defaultValue={
-                          selectedChild.grades.physicalEducation[2]
-                        }
-                        name="physicalEduB3"
-                        register={register}
-                      />
-                    </>
-                    ): null }
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={
+                            selectedChild.grades.physicalEducation[0]
+                          }
+                          name="physicalEduB1"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={
+                            selectedChild.grades.physicalEducation[1]
+                          }
+                          name="physicalEduB2"
+                          register={register}
+                        />
+                        <Input
+                          type="text"
+                          disabled={disabled}
+                          classStyle="spanGradeMobile"
+                          defaultValue={
+                            selectedChild.grades.physicalEducation[2]
+                          }
+                          name="physicalEduB3"
+                          register={register}
+                        />
+                      </>
+                    ) : null}
                     <input
                       disabled
                       className="spanGradeMobile"
@@ -1114,7 +1116,9 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                 </div>
               </li>
             </ul>
-            <button type="submit">Alterar notas</button>
+            {user?.type === "professor" ? (
+              <button type="submit">Alterar notas</button>
+            ) : null}
           </StyledDivGradeMobile>
         ) : null}
       </StylesDivFirstMobile>
