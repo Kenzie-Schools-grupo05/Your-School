@@ -25,7 +25,7 @@ export const StyledLoader = styled.div`
     margin: 8px;
     border-radius: 50%;
     border: 6px solid #fff;
-    border-color: var(--color-secondary) transparent var(--color-secondary) transparent;
+    border-color: #fff transparent var(--color-secondary) transparent;
     animation: lds-dual-ring 1.2s linear infinite;
   }
   @keyframes lds-dual-ring {
