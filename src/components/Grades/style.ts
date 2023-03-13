@@ -4,8 +4,12 @@ export const StylesDivFirstMobile = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (min-width: 1024px) {
 
+  padding-bottom: 16px;
+  @media (min-width: 1024px) {
+    /* display: none; */
+    max-width: 1600px;
+    padding-bottom: 32px;
   }
 
   & .spanDisciplineMobile {
@@ -15,7 +19,6 @@ export const StylesDivFirstMobile = styled.div`
 
     text-align: center;
     width: 360px;
-
   }
   & .divDisciplinesMobile {
     display: flex;
@@ -39,6 +42,7 @@ export const StylesDivFirstMobile = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
+    font-weight: 500;
   }
 
   & .spanGradeMobile {
@@ -65,8 +69,8 @@ export const StylesDivFirstMobile = styled.div`
 `;
 
 export const StyledDivGradeMobile = styled.form`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -74,11 +78,13 @@ flex-direction: column;
   background-color: var(--grey-100);
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   & h2 {
     font-size: var(--title-1);
     text-align: center;
     padding: 20px;
+    font-weight: 500;
   }
 
   & li {
@@ -130,7 +136,7 @@ flex-direction: column;
     width: 100%;
   }
 
-  > button{
+  > button {
     align-self: center;
     margin-top: 1.5rem;
     padding: 11px 0;
@@ -142,10 +148,9 @@ flex-direction: column;
     color: var(--grey-70);
     font-size: var(--btn-fontSize);
     border-radius: 8px;
- 
   }
 
-  > button:hover{
+  > button:hover {
     background-color: var(--color-primary);
     border: 1px solid var(--color-primary);
     color: var(--grey-100);
@@ -158,8 +163,8 @@ flex-direction: column;
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      max-width: 1100px;
-       width: 100%;
+      max-width: 1500px;
+      width: 100%;
     }
   }
 `;

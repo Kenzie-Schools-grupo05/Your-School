@@ -94,6 +94,7 @@ interface iClassRoom {
   grade: iGrade;
   schoolGrades: (studentId: number) => Promise<void>;
   studentGrade: iUser;
+  // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export interface iRegisterFormValues {
@@ -156,6 +157,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const handleLogout = () => {
     localStorage.clear();
+    setStudentGrade(null);
     return navigate("/");
   };
 
@@ -380,19 +382,17 @@ export const UserProvider = ({ children }: iUserProvider) => {
       setLoading(true);
       const response = await api.delete(`/users/${id}`, {
         headers: {
-          Authorization: `Bearer: ${teacherToken}`
-        }
-      })
+          Authorization: `Bearer: ${teacherToken}`,
+        },
+      });
       toast.success("Estudante deletado com sucesso!");
-
     } catch (error) {
       console.error(error);
       toast.error("Erro ao deletar estudante!");
-
-    }finally{
+    } finally {
       setLoading(false);
     }
-  }
+  };
 
   const getNoClassStudents = async (classRoom: string) => {
     const teacherToken = localStorage.getItem("@TOKEN");
@@ -424,11 +424,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
       setShowClasses(false);
       setNewClass(defaultGrades);
       toast.success("Estudante deletado com sucesso!");
-
     } catch (error) {
       console.error(error);
       toast.error("Nenhum estudante está sem turma!");
-
     }
   };
 

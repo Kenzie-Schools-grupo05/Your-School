@@ -1,5 +1,6 @@
 import { FormLogin } from "../../components/FormLogin";
 import logoDesktop from "../../assets/logoDesktop.svg";
+import logoDesktopYourSchool from "../../assets/logoDesktopYourSchool.png";
 import {
   DivForm,
   DivSignUpLink,
@@ -18,7 +19,7 @@ export const Login = () => {
     <MainContainer>
       {loading ? <Loader /> : null}
       <FigureImgLogo>
-        <img src={logoDesktop} alt="logo-school" />
+        <img src={logoDesktopYourSchool} alt="logo-school" />
       </FigureImgLogo>
       <DivForm>
         <FormLogin />

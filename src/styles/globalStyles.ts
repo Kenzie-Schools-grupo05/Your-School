@@ -26,12 +26,13 @@ export const GlobalStyle = createGlobalStyle`
     --input-fontSize: 1.5rem;
     --body: 1.5rem;
     --headLine: 1.375rem;
-    --inputText: 1.2rem;
+    --inputText: 1rem;
 
     --text-1: 1rem;
     --text-2: 0.8rem;
+    --text-3: 0.6rem
 
-    --btn-fontSize: 2rem;
+    --btn-fontSize: 1.3rem;
 
     --Bold: 600;
     --Medium: 500;

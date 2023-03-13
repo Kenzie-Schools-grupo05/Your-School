@@ -32,7 +32,7 @@ export const Classeslist = () => {
           showClasses ? hideClassesBtn() : showClassesBtn();
         }}
       >
-        {showClasses ? "Mostrar menos" : "Mostrar Turmas"}
+        {showClasses ? "Ocultar Turmas" : "Mostrar Turmas"}
       </SelectClass>
       <ul>
         {showClasses && !showStudents
@@ -57,7 +57,7 @@ export const Classeslist = () => {
           <Grades disabled={false} selectedChild={studentGrade} />
         ) : null}
 
-        {showNewStudents && !showClasses
+        {showNewStudents && !studentGrade && !showStudents && !showClasses
           ? newStudents?.map((student) => {
               return (
                 <NewStudents

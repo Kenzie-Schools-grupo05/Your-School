@@ -1,4 +1,5 @@
 import logo from "../../assets/header-logo.svg";
+import headerLogo from "../../assets/headerLogo.svg";
 import menuIcon from "../../assets/menu-icon.svg";
 import LogoutButton from "../../assets/logout-button.svg";
 import {
@@ -17,10 +18,15 @@ export const Header = () => {
   return (
     <ContainerHeader>
       <ContainerLogoAndMenu>
-        <Logo src={logo} alt="website-logo" />
+        <Logo src={headerLogo} alt="website-logo" />
       </ContainerLogoAndMenu>
       <ContainerLogout>
-        <img onClick={handleLogout} src={LogoutButton} alt="" />
+        <img
+          onClick={handleLogout}
+          src={LogoutButton}
+          alt=""
+          className="logoutBtnIcon"
+        />
       </ContainerLogout>
     </ContainerHeader>
   );
