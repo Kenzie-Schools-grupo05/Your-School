@@ -1,5 +1,4 @@
 import { useContext } from "react";
-
 import { Header } from "../../components/Header";
 import { Loader } from "../../components/Loader";
 import { UserContext } from "../../Providers/UserContext";
