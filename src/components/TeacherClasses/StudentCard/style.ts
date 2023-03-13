@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const StudentCardLi = styled.li`
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
+    flex-direction: column;
     align-items: center;
     border-radius: 8px;
     padding: 28px 40px;
@@ -21,7 +23,7 @@ export const StudentCardLi = styled.li`
 
     > div > .editBtn {
         padding: 12px 22px;
-        font-size: var(--btn-fontSize);
+        font-size: var(--text-1);
         color: var( --grey-100);
         background-color: var(--grey-70);
         border: 1px solid var(--grey-80);
@@ -35,7 +37,7 @@ export const StudentCardLi = styled.li`
 
     > div > .deleteBtn {
         padding: 12px 22px;
-        font-size: var(--btn-fontSize);
+        font-size: var(--text-1);
         color: var( --grey-100);
         background-color: var(--negative-feedback);
         border: 1px solid var(--negative-feedback);
@@ -47,4 +49,8 @@ export const StudentCardLi = styled.li`
         background-color: var(--color-terciary);
     }
     
+    @media (min-width: 678px) {
+        flex-direction: row;
+        gap: 0;
+    }
 `

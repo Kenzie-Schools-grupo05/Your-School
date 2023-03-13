@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const NewStudentCard = styled.li`
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
     align-items: center;
     border-radius: 8px;
     padding: 28px 40px;
@@ -27,5 +29,10 @@ export const NewStudentCard = styled.li`
 
     > button:hover{
         background-color: var(--color-primary);
+    }
+
+    @media (min-width: 678px) {
+        flex-direction: row;
+        gap: 0;
     }
 `

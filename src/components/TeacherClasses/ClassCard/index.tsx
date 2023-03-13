@@ -14,8 +14,10 @@ function ClassCard({ name }: iClassCard) {
         <ClassCardLi>
             <h2>{name}</h2>
 
+            <div>
             <button id={name} onClick={() => getClassStudents(name)}>Ver Alunos</button>
-            <button id={name} onClick={() => getNoClassStudents(name)} >Adicionar alunos à turma</button>
+            <button id={name} onClick={() => getNoClassStudents(name)} >Adicionar alunos</button>
+            </div>
         </ClassCardLi>
     )
 }

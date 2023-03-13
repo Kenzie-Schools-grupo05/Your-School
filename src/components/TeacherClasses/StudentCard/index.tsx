@@ -4,12 +4,12 @@ import { StudentCardLi } from "./style";
 
 interface iStudent {
   name: string;
-  id: number;
+  id: number | undefined;
   student: iUser
 }
 
-const StudentCard = ({ name, student }: iStudent) => {
-  const { showStudentGrade } = useContext(UserContext)
+const StudentCard = ({ name, student, id }: iStudent) => {
+  const { showStudentGrade, deleteStudent } = useContext(UserContext)
 
   return (
     <StudentCardLi>
@@ -17,7 +17,7 @@ const StudentCard = ({ name, student }: iStudent) => {
 
       <div>
         <button className="editBtn" onClick={() => showStudentGrade(student)}>Editar</button>
-        <button className="deleteBtn">Deletar</button>
+        <button className="deleteBtn" onClick={() => deleteStudent(id)}>Deletar</button>
       </div>
     </StudentCardLi>
   );

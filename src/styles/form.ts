@@ -34,15 +34,17 @@ export const InputField = styled.div`
     font-size: var(--text-1);
     font-weight: var(--Medium);
 
-    p {
+    /* p {
         color: var(--negative-feedback);
-    }
+    } */
 
     @media (min-width: 500px) {
         width: 60%;
     }
 `;
-
+export const ErrorStyled = styled.p`
+    color: var(--negative-feedback);
+`;
 export const LabelStyled = styled.label`
     display: flex;
     flex-direction: row;

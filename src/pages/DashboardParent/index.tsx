@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Grades } from "../../components/Grades";
-import { GradeStudent } from "../../components/GradeStudent";
 import { iUser, UserContext } from "../../Providers/UserContext";
 import { StyledMain } from "./style";
 
@@ -47,8 +46,8 @@ export const DashboardParent = () => {
             ))}
           </select>
         </div>
-       
-        <Grades disabled={false} selectedChild={selectedChild} />
+
+        <Grades disabled={true} selectedChild={selectedChild} />
       </section>
     </StyledMain>
   );
