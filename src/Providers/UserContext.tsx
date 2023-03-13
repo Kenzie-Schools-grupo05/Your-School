@@ -2,9 +2,10 @@ import { AxiosError } from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { iLoginFormValues } from "../components/FormLogin/type";
 import api from "../services/api";
+import { toast } from "react-toastify";
+
 
 interface iUserProvider {
   children: ReactNode;
@@ -30,6 +31,7 @@ export interface iUser {
   class?: string;
   grades?: iGrade;
   id: number;
+
 }
 
 export interface iGrade {
@@ -132,9 +134,13 @@ export const UserProvider = ({ children }: iUserProvider) => {
         },
       });
       setChilds(users.data);
+      toast.success('Estudante localizado com sucesso!');
+
     } catch (error) {
       const currentError = error as AxiosError<iRequestError>;
       console.log(currentError);
+      toast.success('Estudante não encontrado.');
+
     }
   };
 
@@ -176,6 +182,9 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
+      toast.success('Nota aletarada com sucesso!');
+
+
     } catch (error) {
       console.error(error);
     }
@@ -190,6 +199,8 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
+      toast.success('Estudante adicionado com sucesso!');
+
     } catch (error) {
       console.error(error);
     }
@@ -198,11 +209,10 @@ export const UserProvider = ({ children }: iUserProvider) => {
   const [studentGrade, setStudentGrade] = useState<iUser>({} as iUser);
 
   async function schoolGrades(studentId: number) {
-    const tokenLS =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjc4MzcxOTkwLCJleHAiOjE2NzgzNzU1OTAsInN1YiI6IjEifQ.1sqClQSeGf4fnMPPtuwVNOJJRSd2hCx9_pSDsUosmOw";
-
+    const tokenLS =  localStorage.getItem("@TOKEN");
+      
     try {
-      const response = await api.get<iUser>(`/users/${1}`, {
+      const response = await api.get<iUser>(`/users/${studentId}`, {
         headers: {
           Authorization: `Bearer ${tokenLS}`,
         },
@@ -220,6 +230,7 @@ export const UserProvider = ({ children }: iUserProvider) => {
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@ID", response.data.user.id);
       setUser(response.data.user);
+      toast.success('Login feito com sucesso!');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -233,8 +244,12 @@ export const UserProvider = ({ children }: iUserProvider) => {
       const response = await api.post("register", data);
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@ID", response.data.user.id);
+      toast.success('Cadastro feito com sucesso!');
+
     } catch (error) {
       console.log(error);
+      toast.error('Erro ao cadastrar');
+
     } finally {
       window.location.href = "/";
     }
