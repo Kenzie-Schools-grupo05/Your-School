@@ -118,6 +118,8 @@ flex-direction: column;
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
+    max-width: 1100px;
+    width: 100%;
   }
 
   > button{
@@ -148,6 +150,8 @@ flex-direction: column;
       flex-direction: row;
       align-items: center;
       justify-content: center;
+      max-width: 1100px;
+       width: 100%;
     }
   }
 `;
