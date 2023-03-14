@@ -64,6 +64,7 @@ export const Classeslist = () => {
                   grade={newClass}
                   name={student.name}
                   id={student.id}
+                  key={student.id}
                 />
               );
             })
