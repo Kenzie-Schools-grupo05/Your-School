@@ -376,12 +376,15 @@ export const UserProvider = ({ children }: iUserProvider) => {
 
   const deleteStudent = async (id: number | undefined) => {
     const teacherToken = localStorage.getItem("@TOKEN");
+    const noClass = {
+      class: "",
+    }
 
     try {
       setLoading(true);
-      const response = await api.delete(`/users/${id}`, {
+      const response = await api.patch(`/users/${id}`, noClass, {
         headers: {
-          Authorization: `Bearer: ${teacherToken}`,
+          Authorization: `Bearer ${teacherToken}`,
         },
       });
       toast.success("Estudante deletado com sucesso!");
