@@ -6,8 +6,5 @@ interface iChildren {
 }
 
 export const Providers = ({ children }: iChildren) => (
-  <UserProvider>
-    {children}
-  </UserProvider>
+  <UserProvider>{children}</UserProvider>
 );
-

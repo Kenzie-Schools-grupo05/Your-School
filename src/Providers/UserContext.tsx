@@ -94,7 +94,6 @@ interface iClassRoom {
   grade: iGrade;
   schoolGrades: (studentId: number) => Promise<void>;
   studentGrade: iUser;
-  // setStudentGrade: React.Dispatch<React.SetStateAction<iUser>|[]>
 }
 
 export interface iRegisterFormValues {
@@ -238,13 +237,13 @@ export const UserProvider = ({ children }: iUserProvider) => {
           Authorization: `Bearer ${teacherToken}`,
         },
       });
-    
-      setStudentGrade(response.data)
+
+      setStudentGrade(response.data);
       toast.success("Nota alterada com sucesso!");
     } catch (error) {
       toast.error("Erro na alteração da nota!");
     } finally {
-      setChangedGrades(null)
+      setChangedGrades(null);
       setLoading(false);
     }
   };
@@ -423,14 +422,11 @@ export const UserProvider = ({ children }: iUserProvider) => {
       setShowNewStudents(true);
       setShowClasses(false);
       setNewClass(defaultGrades);
-      toast.success("Estudante deletado com sucesso!");
     } catch (error) {
       console.error(error);
-      toast.error("Nenhum estudante está sem turma!");
+      toast.error("Erro ao buscar alunos sem turma!");
     }
   };
-
-  
 
   return (
     <UserContext.Provider
