@@ -1,7 +1,7 @@
 import { UserInfoStyle } from "./style";
 
 interface iUserInfo {
-  name: string;
+  name: string | undefined;
   classRoom: string;
 }
 
