@@ -53,51 +53,55 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
             )}
             <ul>
               <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">Matemática</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
-                  </div>
+                {selectedChild.class !== "" ? (
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">Matemática</span>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
 
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.mathematics ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.mathematics[0]}
-                          name="mathB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.mathematics[1]}
-                          name="mathB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.mathematics[2]}
-                          name="mathB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.mathematics
-                        ? isApproved(selectedChild?.grades?.mathematics)
-                        : ""}
-                    </span>
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.mathematics ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.mathematics[0]}
+                            name="mathB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.mathematics[1]}
+                            name="mathB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.mathematics[2]}
+                            name="mathB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.mathematics
+                          ? isApproved(selectedChild?.grades?.mathematics)
+                          : ""}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <li>Este aluno não está matriculado em uma turma!</li>
+                )}
               </li>
 
               <li>
