@@ -51,9 +51,9 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
             ) : (
               <h2>Boletim</h2>
             )}
-            <ul>
-              <li>
-                {selectedChild.class !== "" ? (
+            {selectedChild.class ? (
+              <ul>
+                <li>
                   <div className="divDisciplinesMobile">
                     <span className="spanDisciplineMobile">Matemática</span>
                     <div className="divTrimestreMobile">
@@ -99,305 +99,307 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
                       </span>
                     </div>
                   </div>
-                ) : (
-                  <li>Este aluno não está matriculado em uma turma!</li>
-                )}
-              </li>
+                </li>
 
-              <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">Português</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
+                <li>
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">Português</span>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
+
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.portuguese ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.portuguese[0]}
+                            name="portB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.portuguese[1]}
+                            name="portB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.portuguese[2]}
+                            name="portB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.portuguese
+                          ? isApproved(selectedChild?.grades?.portuguese)
+                          : ""}
+                      </span>
+                    </div>
                   </div>
+                </li>
 
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.portuguese ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.portuguese[0]}
-                          name="portB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.portuguese[1]}
-                          name="portB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.portuguese[2]}
-                          name="portB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.portuguese
-                        ? isApproved(selectedChild?.grades?.portuguese)
-                        : ""}
+                <li>
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">História</span>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
+
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.history ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.history[0]}
+                            name="historyB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.history[1]}
+                            name="historyB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.history[2]}
+                            name="historyB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.history
+                          ? isApproved(selectedChild?.grades?.history)
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">Geografia</span>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
+
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.geography ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.geography[0]}
+                            name="geographyB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.geography[1]}
+                            name="geographyB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.geography[2]}
+                            name="geographyB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.geography
+                          ? isApproved(selectedChild?.grades?.geography)
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">Ciências</span>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
+
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.sciences ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.sciences[0]}
+                            name="sciencesB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.sciences[1]}
+                            name="sciencesB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.sciences[2]}
+                            name="sciencesB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.sciences
+                          ? isApproved(selectedChild?.grades?.sciences)
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">Artes</span>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
+
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.art ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.art[0]}
+                            name="artB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.art[1]}
+                            name="artB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={selectedChild.grades.art[2]}
+                            name="artB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.art
+                          ? isApproved(selectedChild?.grades?.art)
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="divDisciplinesMobile">
+                    <span className="spanDisciplineMobile">
+                      Educação Física
                     </span>
-                  </div>
-                </div>
-              </li>
+                    <div className="divTrimestreMobile">
+                      <span className="spanTitleMobile">1ª Tri</span>
+                      <span className="spanTitleMobile">2ª Tri</span>
+                      <span className="spanTitleMobile">3ª Tri</span>
+                      <span className="spanTitleMobile">Apro.</span>
+                    </div>
 
-              <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">História</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
+                    <div className="divGradesMobile">
+                      {selectedChild?.grades?.physicalEducation ? (
+                        <>
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={
+                              selectedChild.grades.physicalEducation[0]
+                            }
+                            name="physicalEduB1"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={
+                              selectedChild.grades.physicalEducation[1]
+                            }
+                            name="physicalEduB2"
+                            register={register}
+                          />
+                          <Input
+                            type="text"
+                            disabled={disabled}
+                            classStyle="spanGradeMobile"
+                            defaultValue={
+                              selectedChild.grades.physicalEducation[2]
+                            }
+                            name="physicalEduB3"
+                            register={register}
+                          />
+                        </>
+                      ) : null}
+                      <span className="spanGradeMobile">
+                        {selectedChild?.grades?.physicalEducation
+                          ? isApproved(selectedChild?.grades?.physicalEducation)
+                          : ""}
+                      </span>
+                    </div>
                   </div>
-
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.history ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.history[0]}
-                          name="historyB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.history[1]}
-                          name="historyB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.history[2]}
-                          name="historyB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.history
-                        ? isApproved(selectedChild?.grades?.history)
-                        : ""}
-                    </span>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">Geografia</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
-                  </div>
-
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.geography ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.geography[0]}
-                          name="geographyB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.geography[1]}
-                          name="geographyB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.geography[2]}
-                          name="geographyB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.geography
-                        ? isApproved(selectedChild?.grades?.geography)
-                        : ""}
-                    </span>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">Ciências</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
-                  </div>
-
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.sciences ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.sciences[0]}
-                          name="sciencesB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.sciences[1]}
-                          name="sciencesB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.sciences[2]}
-                          name="sciencesB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.sciences
-                        ? isApproved(selectedChild?.grades?.sciences)
-                        : ""}
-                    </span>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">Artes</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
-                  </div>
-
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.art ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.art[0]}
-                          name="artB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.art[1]}
-                          name="artB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={selectedChild.grades.art[2]}
-                          name="artB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.art
-                        ? isApproved(selectedChild?.grades?.art)
-                        : ""}
-                    </span>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div className="divDisciplinesMobile">
-                  <span className="spanDisciplineMobile">Educação Física</span>
-                  <div className="divTrimestreMobile">
-                    <span className="spanTitleMobile">1ª Tri</span>
-                    <span className="spanTitleMobile">2ª Tri</span>
-                    <span className="spanTitleMobile">3ª Tri</span>
-                    <span className="spanTitleMobile">Apro.</span>
-                  </div>
-
-                  <div className="divGradesMobile">
-                    {selectedChild?.grades?.physicalEducation ? (
-                      <>
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={
-                            selectedChild.grades.physicalEducation[0]
-                          }
-                          name="physicalEduB1"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={
-                            selectedChild.grades.physicalEducation[1]
-                          }
-                          name="physicalEduB2"
-                          register={register}
-                        />
-                        <Input
-                          type="text"
-                          disabled={disabled}
-                          classStyle="spanGradeMobile"
-                          defaultValue={
-                            selectedChild.grades.physicalEducation[2]
-                          }
-                          name="physicalEduB3"
-                          register={register}
-                        />
-                      </>
-                    ) : null}
-                    <span className="spanGradeMobile">
-                      {selectedChild?.grades?.physicalEducation
-                        ? isApproved(selectedChild?.grades?.physicalEducation)
-                        : ""}
-                    </span>
-                  </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            ) : (
+              <h3>Este aluno não está em uma turma!</h3>
+            )}
             {user?.type === "professor" ? (
               <button type="submit">Alterar notas</button>
             ) : null}
