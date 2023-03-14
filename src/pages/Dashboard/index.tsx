@@ -9,7 +9,6 @@ import { DashboardProfessor } from "../DashboardTeacher";
 export const Dashboard = () => {
   const { user } = useContext(UserContext);
 
-  //Switch case para definir o que vai ser renderizado
   const renderSwitch = (type: string | undefined) => {
     switch (type) {
       case "student":

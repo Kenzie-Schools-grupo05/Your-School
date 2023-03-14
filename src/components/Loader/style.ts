@@ -28,6 +28,7 @@ export const StyledLoader = styled.div`
     border-color: #fff transparent var(--color-secondary) transparent;
     animation: lds-dual-ring 1.2s linear infinite;
   }
+
   @keyframes lds-dual-ring {
     0% {
       transform: rotate(0deg);

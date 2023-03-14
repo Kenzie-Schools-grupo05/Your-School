@@ -6,11 +6,8 @@ export const FormStyled = styled.form`
   justify-content: center;
   align-items: center;
   gap: 24px;
-
   border-radius: var(--radius-default);
-
   width: 100%;
-
   position: relative;
   padding-bottom: 20px;
 
@@ -40,28 +37,18 @@ export const TitleForm = styled.h1`
 
 export const InputField = styled.div`
   padding: 18px 18px;
-
   border-radius: var(--radius-default);
-
   background-color: var(--grey-100);
-
   width: 70%;
   max-width: 410px;
-
   display: flex;
   justify-content: flex-start;
   gap: 12px;
-
   font-size: var(--text-1);
   font-weight: var(--Medium);
   user-select: none;
   overflow: hidden;
-
   max-height: 64px;
-
-  /* p {
-        color: var(--negative-feedback);
-    } */
 
   @media (min-width: 500px) {
     padding: 22px 18px;
@@ -90,11 +77,8 @@ export const LabelStyled = styled.label`
 export const InputStyled = styled.input`
   width: 100%;
   max-width: 200px;
-
   font-size: var(--inputText);
-
   border: none;
-
   outline: none;
 
   :-webkit-autofill {

@@ -3,14 +3,11 @@ import styled from "styled-components";
 
 export const MainContainer = styled.main`
   background-color: var(--color-primary);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   min-height: 100vh;
-
   padding-bottom: 32px;
 
   @media (min-width: 800px) {
@@ -44,14 +41,10 @@ export const DivForm = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-
   background-color: var(--grey-90);
-
   width: 80%;
   max-width: 600px;
-
   border-radius: var(--radius-default);
-
   padding: 40px 0;
 
   p {
@@ -63,17 +56,12 @@ export const DivForm = styled.div`
 
 export const DivSignUpLink = styled.div`
   cursor: pointer;
-
   padding: 20px 20px;
-
   border-radius: var(--radius-default);
-
   width: 70%;
   max-width: 410px;
-
   display: flex;
   justify-content: center;
-
   background-color: var(--color-secondary);
 
   > span {
@@ -81,13 +69,11 @@ export const DivSignUpLink = styled.div`
 
   &:hover {
     transition: 0.6s;
-
     background-color: var(--color-terciary);
   }
   &:hover .signUpLink,
   &:hover .signUpBtn {
     transition: 0.6s;
-
     background-color: var(--color-terciary);
   }
 
@@ -99,16 +85,11 @@ export const DivSignUpLink = styled.div`
 export const SignUpLink = styled(Link)`
   text-align: center;
   text-decoration: none;
-
   background-color: var(--color-secondary);
   color: var(--grey-100);
-
   width: 100%;
-
   border: none;
   border-radius: var(--radius-defaut);
-
   font-size: var(--input-fontSize);
-
   outline: none;
 `;
