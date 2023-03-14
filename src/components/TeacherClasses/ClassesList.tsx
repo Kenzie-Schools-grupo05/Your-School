@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../Providers/UserContext";
 import { Grades } from "../Grades";
-import ClassCard from "./ClassCard";
-import NewStudents from "./NewStudents";
-import StudentCard from "./StudentCard";
+import { ClassCard } from "./ClassCard";
+import { NewStudents } from "./NewStudents";
+import { StudentCard } from "./StudentCard";
 import { MainDash, SelectClass } from "./style";
 
-const Classeslist = () => {
+export const Classeslist = () => {
   const {
     listClassRooms,
     classRoom,
@@ -18,7 +18,7 @@ const Classeslist = () => {
     studentGrade,
     showNewStudents,
     newClass,
-    newStudents
+    newStudents,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Classeslist = () => {
           showClasses ? hideClassesBtn() : showClassesBtn();
         }}
       >
-        {showClasses ? "Mostrar menos" : "Mostrar Turmas"}
+        {showClasses ? "Ocultar Turmas" : "Mostrar Turmas"}
       </SelectClass>
       <ul>
         {showClasses && !showStudents
@@ -53,18 +53,22 @@ const Classeslist = () => {
               );
             })
           : null}
-      {studentGrade && !showStudents && !showClasses ? (
-        <Grades disabled={false} selectedChild={studentGrade} />
-      ) : null}
+        {studentGrade && !showStudents && !showClasses ? (
+          <Grades disabled={false} selectedChild={studentGrade} />
+        ) : null}
 
-        { showNewStudents  && !showClasses ? 
-          newStudents?.map((student) =>{
-            return <NewStudents grade={newClass}  name={student.name} id={student.id} />
-          }): null
-      }
+        {showNewStudents && !studentGrade && !showStudents && !showClasses
+          ? newStudents?.map((student) => {
+              return (
+                <NewStudents
+                  grade={newClass}
+                  name={student.name}
+                  id={student.id}
+                />
+              );
+            })
+          : null}
       </ul>
     </MainDash>
   );
 };
-
-export default Classeslist;

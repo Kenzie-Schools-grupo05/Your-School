@@ -6,7 +6,6 @@ export const StyledDivDashboardStudent = styled.div`
   justify-content: center;
   flex-direction: column;
 
-
   #user__infos {
     border-bottom: 1px solid black;
     margin-bottom: 20px;

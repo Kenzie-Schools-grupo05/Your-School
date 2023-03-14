@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { iGradeForm } from "../schema";
 
-interface iInput extends InputHTMLAttributes<HTMLInputElement> {
+export interface iInput extends InputHTMLAttributes<HTMLInputElement> {
   name:
     | "mathB1"
     | "mathB2"
@@ -31,5 +31,3 @@ interface iInput extends InputHTMLAttributes<HTMLInputElement> {
   classStyle: string;
   register: UseFormRegister<iGradeForm>;
 }
-
-export default iInput

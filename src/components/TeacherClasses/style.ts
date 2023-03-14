@@ -2,16 +2,16 @@ import styled from "styled-components";
 
 export const SelectClass = styled.button`
   padding: 24px 0;
-  width: 100%;
+  width: 70%;
   max-width: 100%;
   margin-top: 75px;
-  font-size: var(--btn-fontSize);
+  font-size: 1.2rem;
   color: var(--grey-100);
   border-radius: 8px;
   background-color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
   cursor: pointer;
-  
+
   align-self: center;
 
   :hover {

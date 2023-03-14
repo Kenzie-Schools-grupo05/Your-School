@@ -1,4 +1,5 @@
 import logo from "../../assets/header-logo.svg";
+import headerLogo from "../../assets/headerLogo.svg";
 import menuIcon from "../../assets/menu-icon.svg";
 import LogoutButton from "../../assets/logout-button.svg";
 import {
@@ -11,19 +12,22 @@ import {
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
 
-const Header = () => {
+export const Header = () => {
   const { handleLogout } = useContext(UserContext);
 
   return (
     <ContainerHeader>
       <ContainerLogoAndMenu>
-        {/* <MenuIconStyled src={menuIcon} alt="menu-access" /> */}
-        <Logo src={logo} alt="website-logo" />
+        <Logo src={headerLogo} alt="website-logo" />
       </ContainerLogoAndMenu>
       <ContainerLogout>
-        <img onClick={handleLogout} src={LogoutButton} alt="" />
+        <img
+          onClick={handleLogout}
+          src={LogoutButton}
+          alt=""
+          className="logoutBtnIcon"
+        />
       </ContainerLogout>
     </ContainerHeader>
   );
 };
-export default Header;
