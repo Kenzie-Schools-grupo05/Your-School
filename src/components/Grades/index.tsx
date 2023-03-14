@@ -46,8 +46,11 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
       <StylesDivFirstMobile>
         {selectedChild ? (
           <StyledDivGradeMobile onSubmit={handleSubmit(submitChangeGrades)}>
-            <h2>Boletim</h2>
-
+            {user?.type === "professor" ? (
+              <h2>Boletim - {selectedChild.name}</h2>
+            ) : (
+              <h2>Boletim</h2>
+            )}
             <ul>
               <li>
                 <div className="divDisciplinesMobile">
