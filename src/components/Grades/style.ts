@@ -4,11 +4,17 @@ export const StylesDivFirstMobile = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding-bottom: 16px;
+
+  ul {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   @media (min-width: 1024px) {
-    /* display: none; */
-    max-width: 1600px;
+    max-width: 1100px;
     padding-bottom: 32px;
   }
 
@@ -16,9 +22,8 @@ export const StylesDivFirstMobile = styled.div`
     padding: 20px 0;
     color: var(--grey-100);
     background-color: var(--color-primary);
-
     text-align: center;
-    width: 360px;
+    width: 300px;
   }
   & .divDisciplinesMobile {
     display: flex;
@@ -33,8 +38,8 @@ export const StylesDivFirstMobile = styled.div`
     margin-top: 11px;
   }
   & .spanTitleMobile {
-    width: 80px;
-    height: 32px;
+    width: 79px;
+    height: 37px;
     background-color: var(--grey-90);
     color: var(--grey-0);
     display: flex;
@@ -46,17 +51,19 @@ export const StylesDivFirstMobile = styled.div`
   }
 
   & .spanGradeMobile {
-    width: 75px;
-    height: 32px;
+    width: 65px;
+    height: 37px;
+    border: none;
+    padding: 0;
     text-align: center;
     align-items: center;
-
     background-color: var(--grey-90);
+    font-size: 14px;
   }
 
   & .divGradesMobile {
-    gap: 10px;
     display: flex;
+    justify-content: space-between;
   }
 
   & .divGradesMobile > span {
@@ -92,6 +99,7 @@ export const StyledDivGradeMobile = styled.form`
     color: var(--grey-100);
     background: white;
     gap: 20px;
+    width: 300px;
   }
   & .spanGrade {
     background-color: var(--grey-90);
@@ -130,7 +138,8 @@ export const StyledDivGradeMobile = styled.form`
   ul {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
+    flex-direction: row;
     flex-wrap: wrap;
     max-width: 1100px;
     width: 100%;
