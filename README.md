@@ -10,7 +10,7 @@ Usuários alunos que podem visualizar suas notas, usuários responsáveis/pais q
 - styled-components
 - toastify
 
-#Tecnologias e ferramentas:
+# Tecnologias e ferramentas:
 - React-TS
 - ContextAPI
 - Json-Server e Json-Server-Auth como API fake
@@ -22,7 +22,7 @@ Usuários alunos que podem visualizar suas notas, usuários responsáveis/pais q
 - Trello
 - Figma
 
-#Usuario professor
+# Usuario professor
 login: professor@mail.com
 senha: 123456
 
