@@ -35,6 +35,7 @@ export const Grades = ({ disabled, selectedChild }: iGradeParent) => {
     }
   };
 
+  
   useEffect(() => {
     if (changedGrades && selectedChild && selectedChild.class) {
       changeStudentGrade(changedGrades, selectedChild.id, selectedChild.class);
